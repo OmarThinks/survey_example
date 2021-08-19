@@ -15,7 +15,7 @@ def count_words(words):
 	"""
 	words = str(words)
 	splitted_words = words.split()
-	print(splitted_words)
+	#print(splitted_words)
 	
 	number_of_words = len(words) # The Third Requirement
 
@@ -39,7 +39,7 @@ def count_words(words):
 			lower_letters_words.append(word)
 	final_answer = [lower_letters_counter, 
 	upper_letters_counter, number_of_words]
-	print(final_answer)
+	#print(final_answer)
 	return final_answer
 
 
@@ -63,8 +63,7 @@ def make_inverted(m, n):
 		Input: m = 6, n = 10
 		Output: [10,9,8,7,6]
 	"""
-	m = int(m)
-	n = int(n)
+	m, n = int(float(m)), int(float(n))
 	if m == n:
 		return []
 	if m>n:
@@ -86,13 +85,9 @@ def make_inverted(m, n):
 		final_list = list(range(n+1,m))
 	#print(final_list)
 	final_list.reverse()
-	print(final_list)
+	#print(final_list)
 	return final_list
 
-make_inverted(2,7)
-make_inverted(7,2)
-make_inverted(6,10)
-make_inverted(10,6)
 
 
 

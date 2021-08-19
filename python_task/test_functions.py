@@ -1,5 +1,5 @@
 import unittest
-from app import count_words
+from app import (count_words, make_inverted)
 
 """
 Here we test the function "count_words"
@@ -12,7 +12,7 @@ pytest -rP
 pytest -rP --junitxml=test-reports/junit.xml --html=test-reports/pytest_report.html --self-contained-html
 """
 
-class count_words_TestCase(unittest.TestCase):
+class _1_count_words_TestCase(unittest.TestCase):
 	def test_001_simple(self):
 		text = "You are given a string of words"
 		return_value = count_words(text)
@@ -64,11 +64,107 @@ class count_words_TestCase(unittest.TestCase):
 
 	def test_008_converted_to_string(self):
 		text = 123 # passing an interger
-		print(text)
 		return_value = count_words(text)
 		correct_return_value = [0, 0, 3]
 		self.assertEqual(return_value,correct_return_value)
 		print("test_008: test_converted_to_string")
+
+
+
+
+
+
+class _2_make_inverted_TestCase(unittest.TestCase):
+	def test_001_positive_odd(self):
+		return_value_1 = make_inverted(2,7)
+		return_value_2 = make_inverted(7,2)
+		correct_return_value = [6, 5,4,3]
+		self.assertEqual(return_value_1, correct_return_value)
+		self.assertEqual(return_value_2, correct_return_value)
+		print("test_001: positive_odd")
+	
+	def test_002_positive_even(self):
+		return_value_1 = make_inverted(6,10)
+		return_value_2 = make_inverted(10,6)
+		correct_return_value = [10,9,8,7,6]
+		self.assertEqual(return_value_1, correct_return_value)
+		self.assertEqual(return_value_2, correct_return_value)
+		print("test_002: positive_even")
+
+	def test_003_negative_odd(self):
+		return_value_1 = make_inverted(-2,-7)
+		return_value_2 = make_inverted(-7,-2)
+		correct_return_value = [-3,-4,-5,-6]
+		self.assertEqual(return_value_1, correct_return_value)
+		self.assertEqual(return_value_2, correct_return_value)
+		print("test_003: negative_odd")
+	
+	def test_004_negative_even(self):
+		return_value_1 = make_inverted(-6,-10)
+		return_value_2 = make_inverted(-10,-6)
+		correct_return_value = [-6,-7,-8,-9,-10]
+		self.assertEqual(return_value_1, correct_return_value)
+		self.assertEqual(return_value_2, correct_return_value)
+		print("test_004: negative_even")
+
+	def test_005_positive_negative_odd(self):
+		return_value_1 = make_inverted(-3,2)
+		return_value_2 = make_inverted(2,-3)
+		correct_return_value = [1,0,-1,-2]
+		self.assertEqual(return_value_1, correct_return_value)
+		self.assertEqual(return_value_2, correct_return_value)
+		print("test_005: positive_negative_odd")
+	
+	def test_006_positive_negative_even(self):
+		return_value_1 = make_inverted(-3,3)
+		return_value_2 = make_inverted(3,-3)
+		correct_return_value = [3,2,1,0,-1,-2,-3]
+		self.assertEqual(return_value_1, correct_return_value)
+		self.assertEqual(return_value_2, correct_return_value)
+		print("test_006: positive_negative_even")
+
+	def test_007_equal_positive(self):
+		return_value_1 = make_inverted(3,3)
+		correct_return_value = []
+		self.assertEqual(type(return_value_1), list)
+		self.assertEqual(return_value_1, correct_return_value)
+		print("test_007: equal_positive")
+
+	def test_008_equal_zero(self):
+		return_value_1 = make_inverted(0,0)
+		correct_return_value = []
+		self.assertEqual(type(return_value_1), list)
+		self.assertEqual(return_value_1, correct_return_value)
+		print("test_008: equal_zero")
+
+	def test_009_equal_negative(self):
+		return_value_1 = make_inverted(-5,-5)
+		correct_return_value = []
+		self.assertEqual(type(return_value_1), list)
+		self.assertEqual(return_value_1, correct_return_value)
+		print("test_009: equal_negative")
+
+	def test_010_string_integer(self):
+		return_value_1 = make_inverted("2","7")
+		return_value_2 = make_inverted("7","2")
+		correct_return_value = [6, 5,4,3]
+		self.assertEqual(return_value_1, correct_return_value)
+		self.assertEqual(return_value_2, correct_return_value)
+		print("test_010: string_integer")
+
+	def test_011_string_float(self):
+		return_value_1 = make_inverted("2.5","7.6")
+		return_value_2 = make_inverted("7.9","2.99")
+		correct_return_value = [6, 5,4,3]
+		self.assertEqual(return_value_1, correct_return_value)
+		self.assertEqual(return_value_2, correct_return_value)
+		print("test_011: string_float")
+
+
+
+	
+	
+
 
 
 
