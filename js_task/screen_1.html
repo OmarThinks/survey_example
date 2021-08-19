@@ -142,7 +142,11 @@ class Package {
   	this.elements_class_name ="package-" + package_number.toString(); 
   	this.elements = document.getElementsByClassName(
   		this.elements_class_name);
-  	//this.paint_background_color("mouseenter","grey");
+  	try{
+  		this.selection_element = document.getElementById(
+  			"selected_pakage_"+this.number.toString());
+  	}
+  	catch{}
   }
   paint_background_color(color, insist=false)
   {
@@ -168,6 +172,17 @@ class Package {
   		this.elements[i].addEventListener(
   			event_name,(e)=>{to_do(this.number)});
   	}
+  }
+  select()
+  {
+  	selected_package = this.number;
+  	try{selection_element.checked = true;}
+  	catch{}
+  }
+  unselect()
+  {
+  	try{selection_element.checked = false;}
+  	catch{}  	
   }
 }
 
@@ -202,7 +217,10 @@ function select_package(package_number)
 {
 	clear_backgrounds(true);
 	packages[package_number].paint_background_color("grey", true);
-	selected_pakage = package_number;
+	for (var i = packages.length - 1; i >= 0; i--) {
+		packages[i].unselect();
+	}
+	packages[package_number].select();
 }
 
 
@@ -214,6 +232,13 @@ for (var i = packages.length - 1; i >= 0; i--) {
 		"mouseenter",package_hovered );
 	packages[i].add_event_listener_to_elements(
 		"mouseleave",clear_backgrounds);
+	packages[i].add_event_listener_to_elements(
+		"click",select_package);
+	try{
+	packages[i].selection_element.addEventListener("click",
+		(e)=>{select_package(i);});
+	}
+	catch{}
 }
 
 
