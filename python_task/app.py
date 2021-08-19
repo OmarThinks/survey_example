@@ -44,13 +44,6 @@ def count_words(words):
 
 
 
-
-
-count_words("You are given a string of words")
-count_words("Please write some Some unit unit tests")
-
-
-
 #----------------------------------------------------------------------------------------------------------#
 
 def make_inverted(m, n):
