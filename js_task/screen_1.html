@@ -93,19 +93,19 @@ td{background: white;}
 
 <tr>
 	<td class="no-border"></td>
-	<td class="package_selector_table_element" 
-	onclick="select_package(0)">
+	<td id="selected_package_cell_0" 
+	class="package_selector_table_element">
 	<input class="package_selector" 
-		id="selected_pakage_0" 
+		id="selected_package_0" 
 		type="radio"></td>
-	<td  class="package_selector_table_element"
-	onclick="select_package(1)">
+	<td id="selected_package_cell_1" 
+	class="package_selector_table_element">
 	<input  class="package_selector" 
-		id="selected_pakage_1"  class="package_selector" 
+		id="selected_package_1"  class="package_selector" 
 		type="radio"></td>
-	<td  class="package_selector_table_element"
-	onclick="select_package(2)">
-	<input id="selected_pakage_2" 
+	<td id="selected_package_cell_2" 
+	class="package_selector_table_element">
+	<input id="selected_package_2" 
 		type="radio"></td>
 </tr>
 <tr class="no-border" style="height: 1.5em;"></tr>
@@ -130,7 +130,7 @@ td{background: white;}
 
 
 <script type="text/javascript">
-/*0:4*/
+/*0:3*/
 selected_package = -1;
 number_of_packages = 4;
 
@@ -144,7 +144,9 @@ class Package {
   		this.elements_class_name);
   	try{
   		this.selection_element = document.getElementById(
-  			"selected_pakage_"+this.number.toString());
+  			"selected_package_"+this.number.toString());
+  		this.selection_element_cell = document.getElementById(
+  			"selected_package_cell_"+this.number.toString());
   	}
   	catch{}
   }
@@ -172,16 +174,23 @@ class Package {
   		this.elements[i].addEventListener(
   			event_name,(e)=>{to_do(this.number)});
   	}
+	try{
+		this.selection_element.addEventListener(
+			event_name,(e)=>{to_do(this.number);});
+		this.selection_element_cell.addEventListener(
+			event_name,(e)=>{to_do(this.number);});
+	}
+	catch{}
   }
   select()
   {
   	selected_package = this.number;
-  	try{selection_element.checked = true;}
+  	try{this.selection_element.checked = true;}
   	catch{}
   }
   unselect()
   {
-  	try{selection_element.checked = false;}
+  	try{this.selection_element.checked = false;}
   	catch{}  	
   }
 }
@@ -196,6 +205,8 @@ packages[3] = new Package(3);
 /*package number is useless, but it is there just to fit the 
 event listner
 */
+
+
 function clear_backgrounds(package_number=0 ,insist = false)
 {
 	for (var i = packages.length - 1; i >= 0; i--) 
@@ -212,15 +223,19 @@ function package_hovered(package_number)
 
 
 
-/*number should be between 0 and 1*/
+/*number should be between 0 and 3*/
 function select_package(package_number)
 {
 	clear_backgrounds(true);
+	//console.log(packages);
+	//console.log("package_number",package_number);
 	packages[package_number].paint_background_color("grey", true);
 	for (var i = packages.length - 1; i >= 0; i--) {
+		if (packages[i].number == package_number) {continue;}
 		packages[i].unselect();
 	}
 	packages[package_number].select();
+	//console.log("selected_package",selected_package);
 }
 
 
@@ -234,16 +249,13 @@ for (var i = packages.length - 1; i >= 0; i--) {
 		"mouseleave",clear_backgrounds);
 	packages[i].add_event_listener_to_elements(
 		"click",select_package);
-	try{
-	packages[i].selection_element.addEventListener("click",
-		(e)=>{select_package(i);});
-	}
-	catch{}
+	//console.log(i);
 }
 
 
 
 
+//console.log(packages);
 
 
 
