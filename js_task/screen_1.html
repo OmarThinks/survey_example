@@ -28,7 +28,7 @@ th,td{
 	border: solid 1px black;
 }
 
-th{background: lightgrey;}
+th{background: lime;}
 td{background: white;}
 
 
@@ -36,12 +36,10 @@ td{background: white;}
 	border-width: 0px;
 }
 
-.package-1
-{background: blue;}
-.package-2
-{background: red;}
-.package-3
-{background: green;}
+
+.package_selector_table_element:hover
+{background: lightblue;}
+
 
 </style>
 
@@ -65,48 +63,66 @@ td{background: white;}
 
 <tr>
 	<th>Price</th>
-	<td class="package-1">For free</td>
-	<td class="package-2">$10/Month</td>
-	<td class="package-3">$100/Month</td>
+	<td class="package-0">For free</td>
+	<td class="package-1">$10/Month</td>
+	<td class="package-2">$100/Month</td>
 </tr>
 
 
 <tr>
 	<th>Max Websites</th>
-	<td class="package-1">1</td>
-	<td class="package-2">3</td>
-	<td class="package-3">Unlimited</td>
+	<td class="package-0">1</td>
+	<td class="package-1">3</td>
+	<td class="package-2">Unlimited</td>
 </tr>
 
 <tr>
 	<th>Bandwidth</th>
+	<td class="package-0">Unlimited</td>
 	<td class="package-1">Unlimited</td>
 	<td class="package-2">Unlimited</td>
-	<td class="package-3">Unlimited</td>
 </tr>
 
 <tr>
 	<th>Processing</th>
-	<td class="package-1">1 Core 3GHz CPU</td>
-	<td class="package-2">2 Core 3GHz CPU</td>
-	<td class="package-3">2 Core 3GHz CPU + 4GB GPU</td>
+	<td class="package-0">1 Core 3GHz CPU</td>
+	<td class="package-1">2 Core 3GHz CPU</td>
+	<td class="package-2">2 Core 3GHz CPU + 4GB GPU</td>
 </tr>
 
 
 <tr>
-	<th></th>
-	<td class="package-1"><input class="package_selector" 
-		id="selected_pakage_1" 
-		type="radio" onclick="select_package(1)"></td>
-	<td class="package-2"><input  class="package_selector" 
-		id="selected_pakage_2"  class="package_selector" 
-		type="radio" onclick="select_package(2)"></td>
-	<td class="package-3"><input id="selected_pakage_3" 
-		type="radio" onclick="select_package(3)"></td>
+	<td class="no-border"></td>
+	<td class="package_selector_table_element" 
+	onclick="select_package(0)">
+	<input class="package_selector" 
+		id="selected_pakage_0" 
+		type="radio"></td>
+	<td  class="package_selector_table_element"
+	onclick="select_package(1)">
+	<input  class="package_selector" 
+		id="selected_pakage_1"  class="package_selector" 
+		type="radio"></td>
+	<td  class="package_selector_table_element"
+	onclick="select_package(2)">
+	<input id="selected_pakage_2" 
+		type="radio"></td>
+</tr>
+<tr class="no-border" style="height: 1.5em;"></tr>
+
+<tr class="row-has-margin-top">
+	<td class="no-border"></td>
+	<td class="package-3" colspan="3">I will not Purchase</td>
 </tr>
 
 
 </table>
+
+
+<div>
+	<button></button>
+</div>
+
 
 
 
@@ -114,6 +130,127 @@ td{background: white;}
 
 
 <script type="text/javascript">
+/*0:4*/
+selected_package = -1;
+number_of_packages = 4;
+
+
+class Package {
+  constructor(package_number) {
+    /*0:3*/
+    this.number = package_number;
+  	this.elements_class_name ="package-" + package_number.toString(); 
+  	this.elements = document.getElementsByClassName(
+  		this.elements_class_name);
+  	//this.paint_background_color("mouseenter","grey");
+  }
+  paint_background_color(color, insist=false)
+  {
+  	let will_paint = false;
+  	if(selected_package == this.number)
+  	{
+  		if (insist) 
+  		{will_paint = true;}
+  	}
+  	else{will_paint = true;}
+  	if (will_paint)
+  	{
+	  	for (var i = this.elements.length - 1; i >= 0; i--) 
+	  	{this.elements[i].style.backgroundColor = color;}  		
+  	}
+  }
+  add_event_listener_to_elements(event_name, to_do)
+  {
+  	for (var i = this.elements.length - 1; i >= 0; i--) {
+  		//this.elements[i].style.backgroundColor = color;
+  		//console.log(to_do);
+  		//console.log(to_do);
+  		this.elements[i].addEventListener(
+  			event_name,(e)=>{to_do(this.number)});
+  	}
+  }
+}
+
+
+var packages = []
+packages[0] = new Package(0);
+packages[1] = new Package(1);
+packages[2] = new Package(2);
+packages[3] = new Package(3);
+
+function clear_backgrounds(insist = false)
+{
+	for (var i = packages.length - 1; i >= 0; i--) 
+	{packages[i].paint_background_color("white", insist);}
+}
+
+
+function package_hovered(package_number)
+{
+	clear_backgrounds();
+	packages[package_number].paint_background_color("grey");
+}
+
+
+
+for (var i = packages.length - 1; i >= 0; i--) {
+	packages[i].add_event_listener_to_elements(
+		"mouseenter",package_hovered );
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*number should be between 0 and 1*/
+function select_package(package_number)
+{
+	clear_backgrounds(true);
+	packages[package_number].paint_background_color("grey", true);
+	selected_pakage = package_number;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+
 
 var selected_pakage = 0;
 
@@ -132,6 +269,7 @@ function select_package(package_number)
 var package_1_elements = document.getElementsByClassName('package-1');
 var package_2_elements = document.getElementsByClassName('package-2');
 var package_3_elements = document.getElementsByClassName('package-3');
+var package_4_elements = document.getElementsByClassName('package-4');
 
 
 
@@ -139,20 +277,24 @@ var package_3_elements = document.getElementsByClassName('package-3');
 function clear_packages_backround()
 {
 	for (var i = package_1_elements.length - 1; i >= 0; i--) {
+		if (selected_pakage == 1) {break;}
 		package_1_elements[i].style.background="white";
 	}
 	for (var i = package_2_elements.length - 1; i >= 0; i--) {
+		if (selected_pakage == 2) {break;}
 		package_2_elements[i].style.background="white";
 	}
 	for (var i = package_3_elements.length - 1; i >= 0; i--) {
+		if (selected_pakage == 3) {break;}
 		package_3_elements[i].style.background="white";
+	}
+	for (var i = package_4_elements.length - 1; i >= 0; i--) {
+		if (selected_pakage == 4) {break;}
+		package_4_elements[i].style.background="white";
 	}
 }
 
 
-
-function highlight_package(package_number)
-{}
 
 function mouseetered(package_number)
 {
@@ -172,28 +314,43 @@ function mouseetered(package_number)
 			package_3_elements[i].style.background="grey";
 		}
 	}
+	else if (package_number==4){
+		for (var i = package_4_elements.length - 1; i >= 0; i--) {
+			package_4_elements[i].style.background="grey";
+		}
+	}
 }
 
 for (var i = package_1_elements.length - 1; i >= 0; i--) {
 	package_1_elements[i].addEventListener("mouseenter", (e)=>{mouseetered(1)});
 	package_1_elements[i].addEventListener("mouseleave", 
 		(e)=>{clear_packages_backround()});
+	package_1_elements[i].addEventListener("click", (e)=>{select_package(1)});
 }
 for (var i = package_2_elements.length - 1; i >= 0; i--) {
 	package_2_elements[i].addEventListener("mouseenter", (e)=>{mouseetered(2)});
 	package_2_elements[i].addEventListener("mouseleave", 
 		(e)=>{clear_packages_backround()});
+	package_2_elements[i].addEventListener("click", (e)=>{select_package(2)});
 }
 for (var i = package_3_elements.length - 1; i >= 0; i--) {
 	package_3_elements[i].addEventListener("mouseenter", (e)=>{mouseetered(3)});
 	package_3_elements[i].addEventListener("mouseleave", 
 		(e)=>{clear_packages_backround()});
+	package_3_elements[i].addEventListener("click", (e)=>{select_package(3)});
+}
+
+for (var i = package_4_elements.length - 1; i >= 0; i--) {
+	package_4_elements[i].addEventListener("mouseenter", (e)=>{mouseetered(4)});
+	package_4_elements[i].addEventListener("mouseleave", 
+		(e)=>{clear_packages_backround()});
+	package_4_elements[i].addEventListener("click", (e)=>{select_package(4)});
 }
 
 
 
 
-
+*/
 
 
 </script>
