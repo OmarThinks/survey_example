@@ -167,7 +167,12 @@ def check_subset(list_one:list, list_two:list):
 	mismatching = []
 	for value_2 in list_two:
 		found_it = False
+		the_type = type(value_2)
 		for key,value_1 in enumerate(list_one):
+			try:
+				value_1 = the_type(value_1) # casted
+			except Exception as e:
+				continue # Sometimes casting may fail
 			if value_1 == value_2:
 				matching.append(value_2)
 				found_it=True
@@ -176,9 +181,14 @@ def check_subset(list_one:list, list_two:list):
 		if not found_it:
 			mismatching.append(value_2)		
 
+
+
 	if mismatching:
 		return mismatching
-	return True
+	elif matching == list_two:
+		return True
+	else:
+		return False
 
 
 print(check_subset([1,2,3,4,5],[1,2,3]))

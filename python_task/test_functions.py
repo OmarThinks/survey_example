@@ -1,5 +1,6 @@
 import unittest
-from app import (count_words, make_inverted,count_matched_numbers)
+from app import (count_words, make_inverted,
+	count_matched_numbers, check_subset)
 
 """
 Here we test the function "count_words"
@@ -224,6 +225,51 @@ class _3_count_matched_numbers_TestCase(unittest.TestCase):
 		self.assertEqual(return_value, correct_return_value)
 		print("test_009: casted_types")
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class _4_check_subset_TestCase(unittest.TestCase):
+	def test_001_is_subset(self):
+		return_value = check_subset([1,2,3,4,5],[1,2,3])
+		correct_return_value = True
+		self.assertEqual(return_value, correct_return_value)
+		print("test_001: is_subset")
+
+	def test_002_empty_list_two(self):
+		return_value = check_subset([1,2,3,4,5],[])
+		correct_return_value = False
+		self.assertEqual(return_value, correct_return_value)
+		print("test_002: empty_list_two")
+
+	def test_003_mismatching_indeces(self):
+		return_value = check_subset([1,2,3,4,5],[1,3,6])
+		correct_return_value = [6]
+		self.assertEqual(return_value, correct_return_value)
+		print("test_003: mismatching_indeces")
+
+	def test_004_mismatching(self):
+		return_value = check_subset([1,2,3,4,5],[5,10])
+		correct_return_value = [10]
+		self.assertEqual(return_value, correct_return_value)
+		print("test_004: mismatching")
+
+	def test_005_repeated(self):
+		return_value = check_subset([1],[1,1,1,1])
+		correct_return_value = [1,1,1]
+		self.assertEqual(return_value, correct_return_value)
+		print("test_005: repeated")
 
 
 
