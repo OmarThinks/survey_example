@@ -55,12 +55,28 @@ class count_words_TestCase(unittest.TestCase):
 		self.assertEqual(return_value,correct_return_value)
 		print("test_006: test_empty_string")
 
-	def test_006_arabic_letters(self):
+	def test_007_arabic_letters(self):
 		text = "فيس بوك"
 		return_value = count_words(text)
 		correct_return_value = [0, 0, 7]
 		self.assertEqual(return_value,correct_return_value)
-		print("test_006: test_arabic_letters")
+		print("test_007: test_arabic_letters")
+
+	def test_008_converted_to_string(self):
+		text = 123 # passing an interger
+		print(text)
+		return_value = count_words(text)
+		correct_return_value = [0, 0, 3]
+		self.assertEqual(return_value,correct_return_value)
+		print("test_008: test_converted_to_string")
+
+
+
+
+
+
+
+
 
 
 # Make the tests conveniently executable

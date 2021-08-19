@@ -13,11 +13,11 @@ def count_words(words):
 	count_words("You are given a string of words") == [6,1, 31]
 	count_words("Please write some Some unit unit tests") == [4, 2, 38]
 	"""
+	words = str(words)
 	splitted_words = words.split()
 	print(splitted_words)
 	
 	number_of_words = len(words) # The Third Requirement
-
 
 	lower_letters_words = []
 	upper_letters_words = []
@@ -60,12 +60,13 @@ def make_inverted(m, n):
 		Output: [6, 5,4,3]
 
 	Example 2:
-
 		Input: m = 6, n = 10
 		Output: [10,9,8,7,6]
-
-
 	"""
+	if m == n:
+		pass
+		
+
 
 #----------------------------------------------------------------------------------------------------------#
 
