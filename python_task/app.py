@@ -107,21 +107,29 @@ def count_matched_numbers(a:list, b:list):
 	>>> count_matched_numbers([1, 2, 3], [4,5,6])
 	False
 	"""
+	
 	matching = 0
+
+	length_of_b = len(b)
+
 	for key,value_1 in enumerate(a):
+		if key>= length_of_b:
+			break # len(a)>len(b) AND we reached the limit 
 		the_type = type(value_1) # getting the type of the element in first list
-		value_2 = the_type(b[key]) # casting types
+		try:
+			value_2 = the_type(b[key]) # casting types
+		except Exception as e:
+			continue # Sometime casting may fail
+		
 		# Now we are sure that value_1 and value_2 have the ame type
 		if value_1 == value_2:
 			matching += 1
-	print(matching)
+	#print(matching)
 	if matching:
 		return matching
 	else:
 		return False
-count_matched_numbers([1, 2, 3], [1, 2, 3])
-count_matched_numbers([1, 2, 3], [1, 5, 3, 4, 5])
-count_matched_numbers([1, 2, 3], [4,5,6])
+
 
 #----------------------------------------------------------------------------------------------------------#
 

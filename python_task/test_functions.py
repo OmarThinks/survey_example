@@ -1,5 +1,5 @@
 import unittest
-from app import (count_words, make_inverted)
+from app import (count_words, make_inverted,count_matched_numbers)
 
 """
 Here we test the function "count_words"
@@ -162,8 +162,67 @@ class _2_make_inverted_TestCase(unittest.TestCase):
 
 
 
-	
-	
+
+
+
+class _3_count_matched_numbers_TestCase(unittest.TestCase):
+	def test_001_exact_match(self):
+		return_value = count_matched_numbers([1, 2, 3], [1, 2, 3])
+		correct_return_value = 3
+		self.assertEqual(return_value, correct_return_value)
+		print("test_001: exact_match")
+
+	def test_002_partial_match(self):
+		return_value = count_matched_numbers([1, 2, 3], [1, 5, 3, 4, 5])
+		correct_return_value = 2
+		self.assertEqual(return_value, correct_return_value)
+		print("test_002: partial_match")
+
+	def test_003_no_match(self):
+		return_value = count_matched_numbers([1, 2, 3], [4,5,6])
+		correct_return_value = False
+		self.assertEqual(return_value, correct_return_value)
+		print("test_003: no_match")
+
+	def test_004_first_is_empty(self):
+		return_value = count_matched_numbers([], [4,5,6])
+		correct_return_value = False
+		self.assertEqual(return_value, correct_return_value)
+		print("test_004: first_is_empty")
+
+	def test_005_second_is_empty(self):
+		return_value = count_matched_numbers([4,5,6],[])
+		correct_return_value = False
+		self.assertEqual(return_value, correct_return_value)
+		print("test_005: second_is_empty")
+
+	def test_006_both_empty(self):
+		return_value = count_matched_numbers([],[])
+		correct_return_value = False
+		self.assertEqual(return_value, correct_return_value)
+		print("test_006: both_empty")
+
+	def test_007_first_not_list(self):
+		try:
+			count_matched_numbers(1,[])
+			raise Exception("First is not list")
+		except Exception as e:
+			pass
+		print("test_007: first_not_list")
+
+	def test_008_second_not_list(self):
+		try:
+			count_matched_numbers([],1)
+			raise Exception("Second is not list")
+		except Exception as e:
+			pass
+		print("test_008: second_not_list")
+
+	def test_009_casted_types(self):
+		return_value = count_matched_numbers([1,2], ["1",2.3])
+		correct_return_value = 2
+		self.assertEqual(return_value, correct_return_value)
+		print("test_009: casted_types")
 
 
 
