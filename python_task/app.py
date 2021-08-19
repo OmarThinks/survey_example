@@ -133,7 +133,7 @@ def count_matched_numbers(a:list, b:list):
 
 #----------------------------------------------------------------------------------------------------------#
 
-def check_subset(list_one, list_two):
+def check_subset(list_one:list, list_two:list):
 	"""
 	You are given two lists of integers list_one and list_two.  If list_two is a subset of list_one, return
 	true, otherwise return list of items that are in list_two but NOT in list_one.
@@ -160,5 +160,25 @@ def check_subset(list_one, list_two):
 		Input: list_one = [1,2,3,4,5], list_two = [5,10]
 		Output: [10]
 	"""
+	if len(list_two) == 0:
+		return False
+
+	matching = []
+	mismatching = []
+	for value in list_two:
+		if value in list_one:
+			matching.append(value)
+			continue
+		mismatching.append(value)		
+	if mismatching:
+		return mismatching
+	return True
+
+
+print(check_subset([1,2,3,4,5],[1,2,3]))
+print(check_subset([1,2,3,4,5],[]))
+print(check_subset([1,2,3,4,5],[1,3,6]))
+print(check_subset([1,2,3,4,5],[5,10]))
+
 
 #----------------------------------------------------------------------------------------------------------#
