@@ -165,11 +165,17 @@ def check_subset(list_one:list, list_two:list):
 
 	matching = []
 	mismatching = []
-	for value in list_two:
-		if value in list_one:
-			matching.append(value)
-			continue
-		mismatching.append(value)		
+	for value_2 in list_two:
+		found_it = False
+		for key,value_1 in enumerate(list_one):
+			if value_1 == value_2:
+				matching.append(value_2)
+				found_it=True
+				list_one.pop(key)
+				break
+		if not found_it:
+			mismatching.append(value_2)		
+
 	if mismatching:
 		return mismatching
 	return True
@@ -179,6 +185,12 @@ print(check_subset([1,2,3,4,5],[1,2,3]))
 print(check_subset([1,2,3,4,5],[]))
 print(check_subset([1,2,3,4,5],[1,3,6]))
 print(check_subset([1,2,3,4,5],[5,10]))
+print(check_subset([1,2,3,4,5],[1,1]))
 
+my_list = [1,2,3,4]
+
+#print(my_list.find(2))
+
+print(my_list.__dir__())
 
 #----------------------------------------------------------------------------------------------------------#
