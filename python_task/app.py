@@ -63,9 +63,38 @@ def make_inverted(m, n):
 		Input: m = 6, n = 10
 		Output: [10,9,8,7,6]
 	"""
+	m = int(m)
+	n = int(n)
 	if m == n:
-		pass
-		
+		return []
+	if m>n:
+		pass # No problem
+	else:
+		m,n = int(n), int(m)
+		# Swapped
+	#print(m,n)
+	# Now m > n
+	difference = m-n
+	difference_is_even = True;
+	#print(difference)
+	if difference%2 != 0:
+		difference_is_even = False
+	final_list = []
+	if difference_is_even:
+		final_list=list(range(n,m+1))
+	else:
+		final_list = list(range(n+1,m))
+	#print(final_list)
+	final_list.reverse()
+	print(final_list)
+	return final_list
+
+make_inverted(2,7)
+make_inverted(7,2)
+make_inverted(6,10)
+make_inverted(10,6)
+
+
 
 
 #----------------------------------------------------------------------------------------------------------#
