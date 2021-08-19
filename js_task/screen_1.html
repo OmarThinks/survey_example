@@ -178,7 +178,10 @@ packages[1] = new Package(1);
 packages[2] = new Package(2);
 packages[3] = new Package(3);
 
-function clear_backgrounds(insist = false)
+/*package number is useless, but it is there just to fit the 
+event listner
+*/
+function clear_backgrounds(package_number=0 ,insist = false)
 {
 	for (var i = packages.length - 1; i >= 0; i--) 
 	{packages[i].paint_background_color("white", insist);}
@@ -188,27 +191,8 @@ function clear_backgrounds(insist = false)
 function package_hovered(package_number)
 {
 	clear_backgrounds();
-	packages[package_number].paint_background_color("grey");
+	packages[package_number].paint_background_color("lightgrey");
 }
-
-
-
-for (var i = packages.length - 1; i >= 0; i--) {
-	packages[i].add_event_listener_to_elements(
-		"mouseenter",package_hovered );
-}
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -220,6 +204,19 @@ function select_package(package_number)
 	packages[package_number].paint_background_color("grey", true);
 	selected_pakage = package_number;
 }
+
+
+
+
+
+for (var i = packages.length - 1; i >= 0; i--) {
+	packages[i].add_event_listener_to_elements(
+		"mouseenter",package_hovered );
+	packages[i].add_event_listener_to_elements(
+		"mouseleave",clear_backgrounds);
+}
+
+
 
 
 
