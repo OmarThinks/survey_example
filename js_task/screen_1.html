@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Screen 1</title>
+
+<style type="text/css">
+
+*{
+	font-family: arial;
+}
+
+
+table
+{
+	width: 100%;
+	margin: 0px;
+	border-collapse: collapse;
+
+}
+
+th,td{
+	align-content: center;
+	text-align: center;
+	margin: 0px;
+	padding: .5em 0px;
+	font-size: 1.3em;
+	border: 0px;
+	border: solid 1px grey;
+}
+
+th{background: lightgrey;}
+td{background: white;}
+
+
+.no-border{
+	border-width: 0px;
+}
+
+.package-1
+{background: blue;}
+.package-2
+{background: red;}
+.package-3
+{background: green;}
+
+</style>
+
+</head>
+<body>
+
+
+<h1>Let's Host Pricing:</h1>
+
+
+<table>
+
+<tr>
+	<td class="no-border" style="width: 25%;"></td>
+	<th style="width: 25%;">Free</th>
+	<th style="width: 25%;">Standard</th>
+	<th style="width: 25%;">Premium</th>
+</tr>
+
+
+
+<tr>
+	<th>Price</th>
+	<td class="package-1">For free</td>
+	<td class="package-2">$10/Month</td>
+	<td class="package-3">$100/Month</td>
+</tr>
+
+
+<tr>
+	<th>Max Websites</th>
+	<td class="package-1">1</td>
+	<td class="package-2">3</td>
+	<td class="package-3">Unlimited</td>
+</tr>
+
+<tr>
+	<th>Bandwidth</th>
+	<td class="package-1">Unlimited</td>
+	<td class="package-2">Unlimited</td>
+	<td class="package-3">Unlimited</td>
+</tr>
+
+<tr>
+	<th>Processing</th>
+	<td class="package-1">1 Core 3GHz CPU</td>
+	<td class="package-2">2 Core 3GHz CPU</td>
+	<td class="package-3">2 Core 3GHz CPU + 4GB GPU</td>
+</tr>
+
+
+<tr>
+	<th></th>
+	<td class="package-1"><input class="package_selector" 
+		id="selected_pakage_1" 
+		type="radio" onclick="select_package(1)"></td>
+	<td class="package-2"><input  class="package_selector" 
+		id="selected_pakage_2"  class="package_selector" 
+		type="radio" onclick="select_package(2)"></td>
+	<td class="package-3"><input id="selected_pakage_3" 
+		type="radio" onclick="select_package(3)"></td>
+</tr>
+
+
+</table>
+
+
+
+
+
+
+<script type="text/javascript">
+
+var selected_pakage = 0;
+
+	function select_package(package_number)
+	{
+		document.getElementById('selected_pakage_1').checked= false;
+		document.getElementById('selected_pakage_2').checked= false;
+		document.getElementById('selected_pakage_3').checked= false;
+		document.getElementById(('selected_pakage_' + package_number.toString()))
+		.checked= true;
+		selected_pakage = package_number;
+	}
+</script>
+
+
+
+
+
+
+</body>
+</html>
