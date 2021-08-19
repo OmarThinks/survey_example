@@ -271,6 +271,18 @@ class _4_check_subset_TestCase(unittest.TestCase):
 		self.assertEqual(return_value, correct_return_value)
 		print("test_005: repeated")
 
+	def test_006_repeated(self):
+		return_value = check_subset([1,2,"3"],["1",2,3])
+		correct_return_value = True
+		self.assertEqual(return_value, correct_return_value)
+		print("test_006: casted")
+
+	def test_007_both_empty(self):
+		return_value = check_subset([],[])
+		correct_return_value = True
+		self.assertEqual(return_value, correct_return_value)
+		print("test_007: both_empty")
+
 
 
 

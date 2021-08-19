@@ -160,6 +160,9 @@ def check_subset(list_one:list, list_two:list):
 		Input: list_one = [1,2,3,4,5], list_two = [5,10]
 		Output: [10]
 	"""
+	if list_one == list_two:
+		return True
+
 	if len(list_two) == 0:
 		return False
 
@@ -180,9 +183,6 @@ def check_subset(list_one:list, list_two:list):
 				break
 		if not found_it:
 			mismatching.append(value_2)		
-
-
-
 	if mismatching:
 		return mismatching
 	elif matching == list_two:
@@ -190,17 +190,5 @@ def check_subset(list_one:list, list_two:list):
 	else:
 		return False
 
-
-print(check_subset([1,2,3,4,5],[1,2,3]))
-print(check_subset([1,2,3,4,5],[]))
-print(check_subset([1,2,3,4,5],[1,3,6]))
-print(check_subset([1,2,3,4,5],[5,10]))
-print(check_subset([1,2,3,4,5],[1,1]))
-
-my_list = [1,2,3,4]
-
-#print(my_list.find(2))
-
-print(my_list.__dir__())
 
 #----------------------------------------------------------------------------------------------------------#
