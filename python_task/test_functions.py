@@ -26,49 +26,49 @@ class _1_count_words_TestCase(unittest.TestCase):
 		return_value = count_words(text)
 		correct_return_value = [4, 2, 38]
 		self.assertEqual(return_value,correct_return_value)
-		print("test_002: test_repeated_lower")
+		print("test_002: repeated_lower")
 
 	def test_003_repeated_upper(self):
 		text = "This This This is repeated upper"
 		return_value = count_words(text)
 		correct_return_value = [3, 1, 32]
 		self.assertEqual(return_value,correct_return_value)
-		print("test_003: test_repeated_upper")
+		print("test_003: repeated_upper")
 
 	def test_004_repeated_upper_and_lower(self):
 		text = "This this This this"
 		return_value = count_words(text)
 		correct_return_value = [1, 1, 19]
 		self.assertEqual(return_value,correct_return_value)
-		print("test_004: test_repeated_upper_and_lower")
+		print("test_004: repeated_upper_and_lower")
 
 	def test_005_numbers(self):
 		text = "123 4 6 87 24"
 		return_value = count_words(text)
 		correct_return_value = [0, 0, 13]
 		self.assertEqual(return_value,correct_return_value)
-		print("test_005: test_repeated_upper_and_lower")
+		print("test_005: numbers")
 
-	def test_006_numbers(self):
+	def test_006_empty_string(self):
 		text = ""
 		return_value = count_words(text)
 		correct_return_value = [0, 0, 0]
 		self.assertEqual(return_value,correct_return_value)
-		print("test_006: test_empty_string")
+		print("test_006: empty_string")
 
 	def test_007_arabic_letters(self):
 		text = "فيس بوك"
 		return_value = count_words(text)
 		correct_return_value = [0, 0, 7]
 		self.assertEqual(return_value,correct_return_value)
-		print("test_007: test_arabic_letters")
+		print("test_007: arabic_letters")
 
 	def test_008_converted_to_string(self):
 		text = 123 # passing an interger
 		return_value = count_words(text)
 		correct_return_value = [0, 0, 3]
 		self.assertEqual(return_value,correct_return_value)
-		print("test_008: test_converted_to_string")
+		print("test_008: converted_to_string")
 
 
 
@@ -282,6 +282,14 @@ class _4_check_subset_TestCase(unittest.TestCase):
 		correct_return_value = True
 		self.assertEqual(return_value, correct_return_value)
 		print("test_007: both_empty")
+
+	def test_008_not_list(self):
+		try:
+			return_value = check_subset(1,[])
+			raise Exception("This is not list")
+		except Exception as e:
+			pass
+		print("test_008: not_list")
 
 
 
