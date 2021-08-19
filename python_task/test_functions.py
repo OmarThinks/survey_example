@@ -148,7 +148,7 @@ class _2_make_inverted_TestCase(unittest.TestCase):
 	def test_010_string_integer(self):
 		return_value_1 = make_inverted("2","7")
 		return_value_2 = make_inverted("7","2")
-		correct_return_value = [6, 5,4,3]
+		correct_return_value = [6,5,4,3]
 		self.assertEqual(return_value_1, correct_return_value)
 		self.assertEqual(return_value_2, correct_return_value)
 		print("test_010: string_integer")
