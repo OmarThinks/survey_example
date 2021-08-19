@@ -112,6 +112,9 @@ def count_matched_numbers(a:list, b:list):
 
 	length_of_b = len(b)
 
+	if len(b) == 0:
+		return 0
+
 	for key,value_1 in enumerate(a):
 		if key>= length_of_b:
 			break # len(a)>len(b) AND we reached the limit 

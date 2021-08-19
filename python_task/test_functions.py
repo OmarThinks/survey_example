@@ -193,13 +193,13 @@ class _3_count_matched_numbers_TestCase(unittest.TestCase):
 
 	def test_005_second_is_empty(self):
 		return_value = count_matched_numbers([4,5,6],[])
-		correct_return_value = False
+		correct_return_value = 0
 		self.assertEqual(return_value, correct_return_value)
 		print("test_005: second_is_empty")
 
 	def test_006_both_empty(self):
 		return_value = count_matched_numbers([],[])
-		correct_return_value = False
+		correct_return_value = 0
 		self.assertEqual(return_value, correct_return_value)
 		print("test_006: both_empty")
 

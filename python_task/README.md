@@ -5,10 +5,12 @@
 
 ## Tests:
 
+- **`*`**: Not documented in requirements, So I Had to Improvise, to handle all cases, but I can modify it if requirements change.
+
 <table>
 	<tr>
 		<th>Index</th>
-		<th>Test_Name</th>
+		<th>Test Name</th>
 		<th>Inputs</th>
 		<th>Output</th>
 		<th>Reason</th>
@@ -42,7 +44,7 @@
 		<td></td>
 	</tr>
 	<tr>
-		<td>5</td>
+		<td>5<sup>*</sup></td>
 		<td>numbers</td>
 		<td>"123 4 6 87 24"</td>
 		<td>[0, 0, 13]</td>
@@ -82,17 +84,18 @@
 # 2) make_inverted:
 
 ## Tests:
+- **`*`**: Not documented in requirements, So I Had to Improvise, to handle all cases, but I can modify it if requirements change.
 
-ANd reversed, means that: (2,7) and (7,2) should return the same answer.  
-So they both have been tested.  
-So I am only telling one of them (2,7).  
-But I have also tested (7,2)
+- **And reversed**, means that: (2,7) and (7,2) should return the same answer.  
+	So they both have been tested.  
+	So I am only telling one of them (2,7).  
+	But I have also tested (7,2)
 
 
 <table>
 	<tr>
 		<th>Index</th>
-		<th>positive_odd</th>
+		<th>Test Name</th>
 		<th>Inputs<sup>And Reversed</sup></th>
 		<th>Output</th>
 		<th></th>
@@ -161,14 +164,14 @@ But I have also tested (7,2)
 		<td></td>
 	</tr>
 	<tr>
-		<td>10</td>
+		<td>10<sup>*</sup></td>
 		<td>string_integer</td>
 		<td>"2" , "7"</td>
 		<td>[6,5,4,3]</td>
 		<td>It has been casted to integer</td>
 	</tr>
 	<tr>
-		<td>10</td>
+		<td>11<sup>*</sup></td>
 		<td>string_float</td>
 		<td>"2.5" , "7.6"</td>
 		<td>[6,5,4,3]</td>
@@ -184,10 +187,97 @@ But I have also tested (7,2)
 
 
 
+# 3) count_matched_numbers:
+
+## Tests:
+- **`*`**: Not documented in requirements, So I Had to Improvise, to handle all cases, but I can modify it if requirements change.
 
 
 
 
+<table>
+	<tr>
+		<td>Index</td>
+		<td>Test Name</td>
+		<td>Inputs</td>
+		<td>Output</td>
+		<td>Reason</td>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td>exact_match</td>
+		<td>[1, 2, 3], [1, 2, 3]</td>
+		<td>3</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>2</td>
+		<td>partial_match</td>
+		<td>[1, 2, 3], [1, 5, 3, 4, 5]</td>
+		<td>2</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>3</td>
+		<td>no_match</td>
+		<td>[1, 2, 3], [4,5,6]</td>
+		<td>False</td>
+		<td>Matching Elements= 0</td>
+	</tr>
+	<tr>
+		<td>4<sup>*</sup></td>
+		<td>first_is_empty</td>
+		<td>[], [4,5,6]</td>
+		<td>False</td>
+		<td>Matching Elements= 0</td>
+	</tr>
+	<tr>
+		<td>5<sup>*</sup></td>
+		<td>second_is_empty</td>
+		<td>[4,5,6],[]</td>
+		<td>0</td>
+		<td>There are no elements in the second set</td>
+	</tr>
+	<tr>
+		<td>6<sup>*</sup></td>
+		<td>both_empty</td>
+		<td>[],[]</td>
+		<td>0</td>
+		<td>There are no elements in the second set</td>
+	</tr>
+	<tr>
+		<td>7<sup>*</sup></td>
+		<td>first_not_list</td>
+		<td>1,[]</td>
+		<td>ERROR</td>
+		<td>Integer is not iterable, expected list</td>
+	</tr>
+	<tr>
+		<td>8<sup>*</sup></td>
+		<td>second_not_list</td>
+		<td>[],1</td>
+		<td>ERROR</td>
+		<td>Integer is not iterable, expected list</td>
+	</tr>
+	<tr>
+		<td>9<sup>*</sup></td>
+		<td>casted_types</td>
+		<td>[1,2], ["1",2.3]</td>
+		<td>2</td>
+		<td>Types have been casted to the type in the first list</td>
+	</tr>
+</table>
+
+
+
+
+
+
+
+# 4) check_subset:
+## Tests:
+
+- **`*`**: Not documented in requirements, So I Had to Improvise, to handle all cases, but I can modify it if requirements change.
 
 
 <table>
@@ -199,109 +289,61 @@ But I have also tested (7,2)
 		<td>Reason</td>
 	</tr>
 	<tr>
-		<td>Index</td>
-		<td>Test_Name</td>
-		<td>Inputs</td>
-		<td>Output</td>
-		<td>Reason</td>
+		<td>1</td>
+		<td>is_subset</td>
+		<td>[1,2,3,4,5],[1,2,3]</td>
+		<td>True</td>
+		<td></td>
 	</tr>
 	<tr>
-		<td>Index</td>
-		<td>Test_Name</td>
-		<td>Inputs</td>
-		<td>Output</td>
-		<td>Reason</td>
+		<td>2</td>
+		<td>empty_list_two</td>
+		<td>[1,2,3,4,5],[]</td>
+		<td>False</td>
+		<td></td>
 	</tr>
 	<tr>
-		<td>Index</td>
-		<td>Test_Name</td>
-		<td>Inputs</td>
-		<td>Output</td>
-		<td>Reason</td>
+		<td>3</td>
+		<td>mismatching_indeces</td>
+		<td>[1,2,3,4,5],[1,3,6]</td>
+		<td>[6]</td>
+		<td></td>
 	</tr>
 	<tr>
-		<td>Index</td>
-		<td>Test_Name</td>
-		<td>Inputs</td>
-		<td>Output</td>
-		<td>Reason</td>
+		<td>4</td>
+		<td>mismatching</td>
+		<td>[1,2,3,4,5],[5,10]</td>
+		<td>[10]</td>
+		<td></td>
 	</tr>
 	<tr>
-		<td>Index</td>
-		<td>Test_Name</td>
-		<td>Inputs</td>
-		<td>Output</td>
-		<td>Reason</td>
+		<td>5<sup>*</sup></td>
+		<td>repeated</td>
+		<td>[1],[1,1,1,1]</td>
+		<td>[1,1,1]</td>
+		<td>The nuber one is only repeated once, 
+		it should be repeated 4 times.</td>
 	</tr>
 	<tr>
-		<td>Index</td>
-		<td>Test_Name</td>
-		<td>Inputs</td>
-		<td>Output</td>
-		<td>Reason</td>
+		<td>6<sup>*</sup></td>
+		<td>casted</td>
+		<td>[1,2,"3"],["1",2,3]</td>
+		<td>True</td>
+		<td>Typoes have been casted</td>
 	</tr>
 	<tr>
-		<td>Index</td>
-		<td>Test_Name</td>
-		<td>Inputs</td>
-		<td>Output</td>
-		<td>Reason</td>
+		<td>7<sup>*</sup></td>
+		<td>both_empty</td>
+		<td>[],[]</td>
+		<td>True</td>
+		<td>It is a subset, because both are empty</td>
 	</tr>
 	<tr>
-		<td>Index</td>
-		<td>Test_Name</td>
-		<td>Inputs</td>
-		<td>Output</td>
-		<td>Reason</td>
-	</tr>
-	<tr>
-		<td>Index</td>
-		<td>Test_Name</td>
-		<td>Inputs</td>
-		<td>Output</td>
-		<td>Reason</td>
-	</tr>
-	<tr>
-		<td>Index</td>
-		<td>Test_Name</td>
-		<td>Inputs</td>
-		<td>Output</td>
-		<td>Reason</td>
-	</tr>
-	<tr>
-		<td>Index</td>
-		<td>Test_Name</td>
-		<td>Inputs</td>
-		<td>Output</td>
-		<td>Reason</td>
-	</tr>
-	<tr>
-		<td>Index</td>
-		<td>Test_Name</td>
-		<td>Inputs</td>
-		<td>Output</td>
-		<td>Reason</td>
-	</tr>
-	<tr>
-		<td>Index</td>
-		<td>Test_Name</td>
-		<td>Inputs</td>
-		<td>Output</td>
-		<td>Reason</td>
-	</tr>
-	<tr>
-		<td>Index</td>
-		<td>Test_Name</td>
-		<td>Inputs</td>
-		<td>Output</td>
-		<td>Reason</td>
-	</tr>
-	<tr>
-		<td>Index</td>
-		<td>Test_Name</td>
-		<td>Inputs</td>
-		<td>Output</td>
-		<td>Reason</td>
+		<td>8<sup>*</sup></td>
+		<td>not_list</td>
+		<td>1,[]</td>
+		<td>ERROR</td>
+		<td>List is not iterable</td>
 	</tr>
 </table>
 
