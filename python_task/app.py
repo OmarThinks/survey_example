@@ -94,7 +94,7 @@ def make_inverted(m, n):
 
 #----------------------------------------------------------------------------------------------------------#
 
-def count_matched_numbers(a, b):
+def count_matched_numbers(a:list, b:list):
 	"""
 	Write a function that takes two lists as parameters and returns a list
 	containing the number of elements that occur in the same index in both
@@ -107,6 +107,21 @@ def count_matched_numbers(a, b):
 	>>> count_matched_numbers([1, 2, 3], [4,5,6])
 	False
 	"""
+	matching = 0
+	for key,value_1 in enumerate(a):
+		the_type = type(value_1) # getting the type of the element in first list
+		value_2 = the_type(b[key]) # casting types
+		# Now we are sure that value_1 and value_2 have the ame type
+		if value_1 == value_2:
+			matching += 1
+	print(matching)
+	if matching:
+		return matching
+	else:
+		return False
+count_matched_numbers([1, 2, 3], [1, 2, 3])
+count_matched_numbers([1, 2, 3], [1, 5, 3, 4, 5])
+count_matched_numbers([1, 2, 3], [4,5,6])
 
 #----------------------------------------------------------------------------------------------------------#
 
