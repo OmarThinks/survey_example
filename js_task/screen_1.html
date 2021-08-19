@@ -25,7 +25,7 @@ th,td{
 	padding: .5em 0px;
 	font-size: 1.3em;
 	border: 0px;
-	border: solid 1px grey;
+	border: solid 1px black;
 }
 
 th{background: lightgrey;}
@@ -117,15 +117,85 @@ td{background: white;}
 
 var selected_pakage = 0;
 
-	function select_package(package_number)
-	{
-		document.getElementById('selected_pakage_1').checked= false;
-		document.getElementById('selected_pakage_2').checked= false;
-		document.getElementById('selected_pakage_3').checked= false;
-		document.getElementById(('selected_pakage_' + package_number.toString()))
-		.checked= true;
-		selected_pakage = package_number;
+function select_package(package_number)
+{
+	document.getElementById('selected_pakage_1').checked= false;
+	document.getElementById('selected_pakage_2').checked= false;
+	document.getElementById('selected_pakage_3').checked= false;
+	document.getElementById(('selected_pakage_' + package_number.toString()))
+	.checked= true;
+	selected_pakage = package_number;
+}
+
+
+
+var package_1_elements = document.getElementsByClassName('package-1');
+var package_2_elements = document.getElementsByClassName('package-2');
+var package_3_elements = document.getElementsByClassName('package-3');
+
+
+
+
+function clear_packages_backround()
+{
+	for (var i = package_1_elements.length - 1; i >= 0; i--) {
+		package_1_elements[i].style.background="white";
 	}
+	for (var i = package_2_elements.length - 1; i >= 0; i--) {
+		package_2_elements[i].style.background="white";
+	}
+	for (var i = package_3_elements.length - 1; i >= 0; i--) {
+		package_3_elements[i].style.background="white";
+	}
+}
+
+
+
+function highlight_package(package_number)
+{}
+
+function mouseetered(package_number)
+{
+	clear_packages_backround();
+	if (package_number==1){
+		for (var i = package_1_elements.length - 1; i >= 0; i--) {
+			package_1_elements[i].style.background="grey";
+		}
+	}
+	else if (package_number==2){
+		for (var i = package_2_elements.length - 1; i >= 0; i--) {
+			package_2_elements[i].style.background="grey";
+		}
+	}
+	else if (package_number==3){
+		for (var i = package_3_elements.length - 1; i >= 0; i--) {
+			package_3_elements[i].style.background="grey";
+		}
+	}
+}
+
+for (var i = package_1_elements.length - 1; i >= 0; i--) {
+	package_1_elements[i].addEventListener("mouseenter", (e)=>{mouseetered(1)});
+	package_1_elements[i].addEventListener("mouseleave", 
+		(e)=>{clear_packages_backround()});
+}
+for (var i = package_2_elements.length - 1; i >= 0; i--) {
+	package_2_elements[i].addEventListener("mouseenter", (e)=>{mouseetered(2)});
+	package_2_elements[i].addEventListener("mouseleave", 
+		(e)=>{clear_packages_backround()});
+}
+for (var i = package_3_elements.length - 1; i >= 0; i--) {
+	package_3_elements[i].addEventListener("mouseenter", (e)=>{mouseetered(3)});
+	package_3_elements[i].addEventListener("mouseleave", 
+		(e)=>{clear_packages_backround()});
+}
+
+
+
+
+
+
+
 </script>
 
 
