@@ -32,6 +32,13 @@ td{background: white;text-align: center;}
 .no-border{
 	border-width: 0px;
 }
+.err_message{
+	color: red;
+}
+
+
+#percentage_6
+{}
 
 </style>
 
@@ -54,38 +61,52 @@ Select all that apply.
 	</tr>
 <tr>
 	<th>I traded on my own using online brokerage</th>
-	<td><input id="checkbox_1" type="checkbox" name="choice_1"></td>
-	<td><input id="percentage_1" type="text" name="percentage_1"> %</td>
+	<td><input id="checkbox_0" type="checkbox" name="choice_0"></td>
+	<td><input id="percentage_0" type="text" name="percentage_0"> %
+		<div id="err_message_0" class="err_message"></div>
+	</td>
 </tr>
 <tr>
 	<th>I used an online service to automatically invest</th>
-	<td><input id="checkbox_2" type="checkbox" name="choice_2"></td>
-	<td><input id="percentage_2" type="text" name="percentage_2"> %</td>
+	<td><input id="checkbox_1" type="checkbox" name="choice_1"></td>
+	<td><input id="percentage_1" type="text" name="percentage_1"> %
+		<div id="err_message_1" class="err_message"></div>
+	</td>
 </tr>
 <tr>
 	<th>A bank or other professional</th>
-	<td><input id="checkbox_3" type="checkbox" name="choice_3"></td>
-	<td><input id="percentage_3" type="text" name="percentage_3"> %</td>
+	<td><input id="checkbox_2" type="checkbox" name="choice_2"></td>
+	<td><input id="percentage_2" type="text" name="percentage_2"> %
+		<div id="err_message_2" class="err_message"></div>
+	</td>
 </tr>
 <tr>
 	<th>A family member</th>
-	<td><input id="checkbox_4" type="checkbox" name="choice_4"></td>
-	<td><input id="percentage_4" type="text" name="percentage_4"> %</td>
+	<td><input id="checkbox_3" type="checkbox" name="choice_3"></td>
+	<td><input id="percentage_3" type="text" name="percentage_3"> %
+		<div id="err_message_3" class="err_message"></div>
+	</td>
 </tr>
 <tr>
 	<th>I did not trade</th>
-	<td><input id="checkbox_5" type="checkbox" name="choice_5"></td>
-	<td><input id="percentage_5" type="text" name="percentage_5"> %</td>
+	<td><input id="checkbox_4" type="checkbox" name="choice_4"></td>
+	<td><input id="percentage_4" type="text" name="percentage_4"> %
+		<div id="err_message_4" class="err_message"></div>
+	</td>
 </tr>
 <tr>
 	<th>I am not sure</th>
-	<td><input id="checkbox_6" type="checkbox" name="choice_6"></td>
-	<td><input id="percentage_6" type="text" name="percentage_6"> %</td>
+	<td><input id="checkbox_5" type="checkbox" name="choice_5"></td>
+	<td><input id="percentage_5" type="text" name="percentage_5"> %
+		<div id="err_message_5" class="err_message"></div>
+	</td>
 </tr>
 <tr>
 	<th>Other (Please specify)</th>
-	<td><input id="checkbox_7" type="checkbox" name="choice_7"></td>
-	<td><input id="percentage_7" type="text" name="percentage_7"> %</td>
+	<td><input id="checkbox_6" type="checkbox" name="choice_6"></td>
+	<td><input id="percentage_6" type="text" name="percentage_6" disabled> %
+		<p id="err_message_6" class="err_message">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+	</td>
 </tr>
 <tr>
 	<th>Number of methods selected</th>
@@ -94,6 +115,72 @@ Select all that apply.
 </tr>
 
 </table>
+
+
+
+
+<script type="text/javascript">
+
+class Spending{
+	constructor(spending_number)
+	{
+		this.number = spending_number;
+		this.ckeckbox_element = document.getElementById(
+			'checkbox_'+this.number.toString());
+		this.percentage_element = document.getElementById(
+			'percentage_'+this.number.toString());
+		this.err_message_element = document.getElementById(
+			'err_message_'+this.number.toString());
+	}
+	get_checked()
+	{return this.ckeckbox_element.ckecked;}
+	get_percentage()
+	{return this.percentage_element.value;}
+	
+	set_err_message(new_message)
+	{this.err_message_element.innerHTML = new_message;}
+	unset_err_message()
+	{this.set_err_message("");}
+	
+	enable_percentage(new_message)
+	{
+		this.percentage_element.disabled = false;
+		this.percentage_element.value="";
+		this.unset_err_message();
+	}
+	disable_percentage(new_message)
+	{
+		this.percentage_element.disabled = true;
+		this.unset_err_message();
+	}
+	check()
+	{
+		this.ckeckbox_element.ckecked = true;
+		this.enable_percentage();
+	}
+	uncheck()
+	{
+		this.ckeckbox_element.ckecked = false;
+		this.disable_percentage();
+	}
+}
+
+var spendings = [];
+spendings[0] = new Spending(0);
+spendings[1] = new Spending(1);
+spendings[2] = new Spending(2);
+spendings[3] = new Spending(3);
+spendings[4] = new Spending(4);
+spendings[5] = new Spending(5);
+spendings[6] = new Spending(6);
+
+
+console.log(spendings);
+
+
+
+
+</script>
 
 
 
