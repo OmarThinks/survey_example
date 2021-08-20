@@ -65,6 +65,44 @@ a, a:hover,a:visited, a:active{text-decoration: none}
 	background: lightblue;
 }
 
+
+
+
+
+
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 3px dotted darkblue;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  transition: .0s;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+
+
+
+
+
+
+
 </style>
 
 </head>
@@ -88,8 +126,23 @@ a, a:hover,a:visited, a:active{text-decoration: none}
 <tr>
 	<th>Price</th>
 	<td class="package-0">For free</td>
-	<td class="package-1">$10/Month</td>
-	<td class="package-2">$100/Month</td>
+	<td class="package-1">
+
+<div class="tooltip">$10/Month
+  <span class="tooltiptext">If you pay annually, 
+  you will get a 20% discount</span>
+</div>
+
+
+</td>
+	<td class="package-2">
+
+<div class="tooltip">$100/Month
+  <span class="tooltiptext">If you pay annually, 
+  you will get a 25% discount</span>
+</div>
+
+</td>
 </tr>
 
 
@@ -102,7 +155,8 @@ a, a:hover,a:visited, a:active{text-decoration: none}
 
 <tr>
 	<th>Bandwidth</th>
-	<td class="package-0">Unlimited</td>
+	<td class="package-0">
+	Unlimited</td>
 	<td class="package-1">Unlimited</td>
 	<td class="package-2">Unlimited</td>
 </tr>

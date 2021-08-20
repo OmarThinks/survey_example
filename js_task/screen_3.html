@@ -56,6 +56,56 @@ td{background: white;text-align: center;}
 	background: lightblue;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 3px dotted darkblue;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  transition: .0s;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+
+
+
+
+
+
+
+
+
 </style>
 
 
@@ -84,7 +134,14 @@ td{background: white;text-align: center;}
 		<th class="payment-plan-cell" style="text-align: center;">Expect For Free</th>
 	</tr>
 	<tr>
-		<th>Biometrics</th>
+		<th>
+
+<div class="tooltip">Biometrics
+  <span class="tooltiptext">Tooltip of Biometrics</span>
+</div> 
+
+
+		</th>
 		<td><input type="radio" id="required_0"></td>
 		<td><input type="radio" id="like_0"></td>
 		<td><input type="radio" id="not_need_0"></td>
@@ -93,7 +150,13 @@ td{background: white;text-align: center;}
 		<td><input type="radio" id="free_0"></td>
 	</tr>
 	<tr>
-		<th>ID Card Reader</th>
+		<th>
+
+		
+<div class="tooltip">ID Card Reader
+  <span class="tooltiptext">Tooltip of ID Card Reader</span>
+</div>
+	</th>
 		<td><input type="radio" id="required_1"></td>
 		<td><input type="radio" id="like_1"></td>
 		<td><input type="radio" id="not_need_1"></td>
