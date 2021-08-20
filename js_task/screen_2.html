@@ -111,7 +111,10 @@ Select all that apply.
 <tr>
 	<th>Number of methods selected</th>
 	<td id="sum_checked">0</td>
-	<td id="sum_percentage">0</td>
+	<td>
+		<div id="sum_percentage">0</div>
+		<div id="sum_percentage_error" class="err_message"></div>
+	</td>
 </tr>
 
 </table>
@@ -164,13 +167,13 @@ class Spending{
 	{
 		if (this.percentage_is_valid()) 
 		{
-			console.log("it is valid");
+			//console.log("it is valid");
 			this.unset_err_message();
 			return true;
 		}
 		else
 		{
-			console.log("it is not valid");
+			//console.log("it is not valid");
 			this.set_err_message("This should be a number");
 			return false;
 		}
@@ -272,12 +275,32 @@ function handle_percentage_change_event(event)
 	//event.preventDefault();
 	//console.log(spendings)
 	let sum_of_percentages= 0;
-	for (var i = spendings.length - 1; i >= 0; i--) {
+	let all_valid = true;
+	for (var i = spendings.length - 1; i >= 0; i--) 
+	{
 		console.log(i,spendings[i].get_percentage());
 		sum_of_percentages += spendings[i].get_percentage();
+		if (!spendings[i].percentage_is_valid())
+		{all_valid=false;}
+		console.log(all_valid);
 	}
-	document.getElementById("sum_percentage").innerHTML 
-	= sum_of_percentages.toString();
+	document.getElementById(
+		"sum_percentage").innerHTML = sum_of_percentages.toString();
+	
+	//console.log(document.getElementById("sum_percentage_error"));
+	document.getElementById('sum_percentage_error').innerHTML = "";
+	
+	if (all_valid)
+	{
+		if (sum_of_percentages!=100){
+			console.log(sum_of_percentages);
+			document.getElementById('sum_percentage_error').innerHTML = 
+			"Some of percetage should be equal to 100";			
+		}
+
+	}
+
+
 }
 
 
@@ -300,6 +323,7 @@ for (var i = spendings.length - 1; i >= 0; i--) {
 }
 
 
+//console.log(document.getElementById("sum_percentage_error"));
 
 </script>
 
