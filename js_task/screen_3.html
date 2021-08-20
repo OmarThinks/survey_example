@@ -73,20 +73,21 @@ td{background: white;text-align: center;}
 		<td><input type="radio" id="required_0"></td>
 		<td><input type="radio" id="like_0"></td>
 		<td><input type="radio" id="not_need_0"></td>
-		<td class="payment-plan-cell" ><input type="radio" id="would_0"></td>
-		<td class="payment-plan-cell" ><input type="radio" id="might_0"></td>
-		<td class="payment-plan-cell" ><input type="radio" id="free_0"></td>
+		<td><input type="radio" id="would_0"></td>
+		<td><input type="radio" id="might_0"></td>
+		<td><input type="radio" id="free_0"></td>
 	</tr>
 	<tr>
 		<th>ID Card Reader</th>
 		<td><input type="radio" id="required_1"></td>
 		<td><input type="radio" id="like_1"></td>
 		<td><input type="radio" id="not_need_1"></td>
-		<td class="payment-plan-cell" ><input type="radio" id="would_1"></td>
-		<td class="payment-plan-cell"><input type="radio" id="might_1"></td>
-		<td class="payment-plan-cell"><input type="radio" id="free_1"></td>
+		<td><input type="radio" id="would_1"></td>
+		<td><input type="radio" id="might_1"></td>
+		<td><input type="radio" id="free_1"></td>
 	</tr>
 </table>
+
 
 
 <script type="text/javascript">
@@ -153,6 +154,46 @@ class PaymentPlan{
 		this.reset_selection();
 		this.free_input_element.checked=true;
 		this.selected="free";
+	}
+
+	display()
+	{
+		this.would_input_element.style.display="";
+		this.would_input_cell.style.display="table-cell";
+		this.might_input_element.style.display="";
+		this.might_input_cell.style.display="table-cell";
+		this.free_input_element.style.display="";
+		this.free_input_cell.style.display="table-cell";
+		//this.reset_selection();		
+	}
+	hide()
+	{
+		this.would_input_element.style.display="none";
+		this.would_input_cell.style.display="none";
+		this.might_input_element.style.display="none";
+		this.might_input_cell.style.display="none";
+		this.free_input_element.style.display="none";
+		this.free_input_cell.style.display="none";
+		this.reset_selection();
+	}
+	enable()
+	{
+		this.would_input_element.style.display="";
+		this.would_input_cell.style.background="white";
+		this.might_input_element.style.display="";
+		this.might_input_cell.style.background="white";
+		this.free_input_element.style.display="";
+		this.free_input_cell.style.background="white";
+	}
+	disable()
+	{
+		this.would_input_element.style.display="none";
+		this.would_input_cell.style.background="grey";
+		this.might_input_element.style.display="none";
+		this.might_input_cell.style.background="grey";
+		this.free_input_element.style.display="none";
+		this.free_input_cell.style.background="grey";
+		this.reset_selection();		
 	}
 }
 
@@ -224,7 +265,7 @@ class Requirement{
 
 
 
-payment_plan_visibility = "table-cell";
+is_visible_payment_plan = true;
 
 
 
@@ -262,7 +303,10 @@ function hide_payment_plan()
 	for (var i = cells.length - 1; i >= 0; i--) {
 		cells[i].style.display="none";
 	}
-	payment_plan_visibility="none";
+	for (var i = requirements.length - 1; i >= 0; i--) 
+	{requirements[i].payment_plan.hide();}
+
+	is_visible_payment_plan=false;
 }
 
 
@@ -274,21 +318,73 @@ function view_payment_plan()
 	for (var i = cells.length - 1; i >= 0; i--) {
 		cells[i].style.display="table-cell";
 	}
-	payment_plan_visibility="table-cell";
+	for (var i = requirements.length - 1; i >= 0; i--) 
+	{requirements[i].payment_plan.display();}
+	is_visible_payment_plan=true;
 }
+
+
+
+
+function disable_payment_plan(target_number)
+{
+	console.log("target_number",target_number);
+console.log("before", 
+requirements[target_number].payment_plan.would_input_element.style.display);
+
+requirements[target_number].payment_plan.would_input_element.style.display="none";
+requirements[target_number].payment_plan.would_input_cell.style.background="grey";
+
+requirements[target_number].payment_plan.might_input_element.style.display="none";
+requirements[target_number].payment_plan.might_input_cell.style.background="grey";
+
+requirements[target_number].payment_plan.free_input_element.style.display="none";
+requirements[target_number].payment_plan.free_input_cell.style.background="grey";
+	
+
+console.log("after", 
+		requirements[target_number].payment_plan.would_input_element.style.display);
+}
+function enable_payment_paln(target_number)
+{}
+
 
 
 function handle_selection(event)
 {
+	//console.log(is_visible_payment_plan);
 	let target_number = get_target_number(event);
 	let target_name = get_target_name(event);
 
 	if (target_name=="required")
-	{requirements[target_number].select_required();}
+	{
+		requirements[target_number].select_required();
+		if (is_visible_payment_plan)
+		{requirements[target_number].payment_plan.enable();}
+		
+	}
 	else if (target_name=="like")
-	{requirements[target_number].select_like();}
+	{
+		requirements[target_number].select_like();
+		if (is_visible_payment_plan)
+		{requirements[target_number].payment_plan.enable();}
+	}
 	else if (target_name=="not")
-	{requirements[target_number].select_not_need();}
+	{
+		requirements[target_number].select_not_need();
+		if (is_visible_payment_plan)
+		{
+			console.log("I should disable");
+			//requirements[target_number].payment_plan.hide();
+			//hide_payment_plan();
+			//requirements[0].payment_plan.hide();
+			//console.log(requirements);
+			//console.log("pay",requirements[0].payment_plan.disable())
+			requirements[target_number].payment_plan.disable();
+			//disable_payment_plan(target_number);
+			//disable_payment_plan(target_number);
+		}		
+	}
 	
 	else if (target_name=="would")
 	{requirements[target_number].payment_plan.select_would();return;}
@@ -298,12 +394,15 @@ function handle_selection(event)
 	{requirements[target_number].payment_plan.select_free();return;}
 	
 	
-	let is_all_selected = true;
+	if (!is_visible_payment_plan) 
+	{
+		let is_all_selected = true;
+		for (var i = requirements.length - 1; i >= 0; i--) 
+		{if (!requirements[i].selected){is_all_selected=false;}}
+		if (is_all_selected)
+		{view_payment_plan()}
+	}
 
-	for (var i = requirements.length - 1; i >= 0; i--) 
-	{if (!requirements[i].selected){is_all_selected=false;}}
-	if (is_all_selected)
-	{view_payment_plan()}
 }
 
 console.log(requirements);
@@ -345,12 +444,6 @@ for (var i = requirements.length - 1; i >= 0; i--) {
 		"click",handle_selection);
 	requirements[i].payment_plan.free_input_cell.addEventListener(
 		"click",handle_selection);
-	
-
-
-
-
-
 }
 
 hide_payment_plan();
