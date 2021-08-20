@@ -174,13 +174,11 @@ class Spending{
 		}
 		if (this.percentage_is_valid()) 
 		{
-			//console.log("it is valid");
 			this.unset_err_message();
 			return true;
 		}
 		else
 		{
-			//console.log("it is not valid");
 			this.set_err_message("This should be a number");
 			return false;
 		}
@@ -220,14 +218,8 @@ class Spending{
 	}
 	reverse_checked()
 	{
-		//console.log("before", this.get_checked());
-		if (this.get_checked()) {
-			//console.log("I will uncheck");
-			this.uncheck();}
-		else{
-			//console.log("I will check");
-			this.check();}
-		//console.log("after",  this.get_checked());
+		if (this.get_checked()) {this.uncheck();}
+		else{this.check();}
 	}
 }
 
@@ -260,23 +252,19 @@ function check_percetage()
 	for (var i = spendings.length - 1; i >= 0; i--) 
 	{
 		spendings[i].validate_percentage()
-		//console.log(i,spendings[i].get_percentage());
 		sum_of_percentages += spendings[i].get_percentage();
 		if (!spendings[i].percentage_is_valid())
 		{all_valid=false;}
-		//console.log(all_valid);
 	}
 	document.getElementById(
 		"sum_percentage").innerHTML = sum_of_percentages.toString();
 	
-	//console.log(document.getElementById("sum_percentage_error"));
 	document.getElementById('sum_percentage_error').innerHTML = "";
 	document.getElementById('sum_percentage').style.color="black";		
 
 	if (all_valid)
 	{
 		if (sum_of_percentages!=100){
-			//console.log(sum_of_percentages);
 			document.getElementById('sum_percentage_error').innerHTML = 
 			"Some of percetage should be equal to 100";
 			document.getElementById('sum_percentage').style.color="red";		
@@ -291,16 +279,12 @@ function check_percetage()
 
 function handle_checkbox_event(event)
 {
-	//event.preventDefault();
 	let spending_number = get_target_number(event);
 	spendings[spending_number].reverse_checked();
-	//if (event.target.nodeName == "INPUT") 
-	//{spendings[spending_number].reverse_checked();}
 	let sum_of_checked = 0;
 	for (var i = spendings.length - 1; i >= 0; i--) {
 		if ( (spending_number ==4) ||(spending_number ==5)||
 		(spending_number ==6) ){
-			//console.log("exclusive");
 			if (i!=spending_number) {spendings[i].uncheck();}
 		}
 		else
@@ -318,7 +302,7 @@ function handle_checkbox_event(event)
 
 
 
-console.log(spendings);
+//console.log(spendings);
 
 
 

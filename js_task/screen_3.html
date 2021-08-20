@@ -101,10 +101,10 @@ class PaymentPlan{
 		
 		this.would_input_element = 
 		document.getElementById('would_'+requirement_number.toString());
-		console.log(this.would_input_element);
+		//console.log(this.would_input_element);
 
 		this.would_input_cell = this.would_input_element.offsetParent;
-		console.log(this.would_input_cell);
+		//console.log(this.would_input_cell);
 		this.would_input_cell.id = 
 		"would_cell_"+requirement_number.toString();
 
@@ -326,27 +326,7 @@ function view_payment_plan()
 
 
 
-function disable_payment_plan(target_number)
-{
-	console.log("target_number",target_number);
-console.log("before", 
-requirements[target_number].payment_plan.would_input_element.style.display);
 
-requirements[target_number].payment_plan.would_input_element.style.display="none";
-requirements[target_number].payment_plan.would_input_cell.style.background="grey";
-
-requirements[target_number].payment_plan.might_input_element.style.display="none";
-requirements[target_number].payment_plan.might_input_cell.style.background="grey";
-
-requirements[target_number].payment_plan.free_input_element.style.display="none";
-requirements[target_number].payment_plan.free_input_cell.style.background="grey";
-	
-
-console.log("after", 
-		requirements[target_number].payment_plan.would_input_element.style.display);
-}
-function enable_payment_paln(target_number)
-{}
 
 
 
@@ -374,15 +354,8 @@ function handle_selection(event)
 		requirements[target_number].select_not_need();
 		if (is_visible_payment_plan)
 		{
-			console.log("I should disable");
-			//requirements[target_number].payment_plan.hide();
-			//hide_payment_plan();
-			//requirements[0].payment_plan.hide();
-			//console.log(requirements);
-			//console.log("pay",requirements[0].payment_plan.disable())
+			//console.log("I should disable");
 			requirements[target_number].payment_plan.disable();
-			//disable_payment_plan(target_number);
-			//disable_payment_plan(target_number);
 		}		
 	}
 	
@@ -405,7 +378,7 @@ function handle_selection(event)
 
 }
 
-console.log(requirements);
+//console.log(requirements);
 
 
 
