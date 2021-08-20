@@ -246,6 +246,40 @@ function get_target_number(event)
 
 
 
+function check_percetage()
+{
+	let sum_of_percentages= 0;
+	let all_valid = true;
+	for (var i = spendings.length - 1; i >= 0; i--) 
+	{
+		spendings[i].validate_percentage()
+		console.log(i,spendings[i].get_percentage());
+		sum_of_percentages += spendings[i].get_percentage();
+		if (!spendings[i].percentage_is_valid())
+		{all_valid=false;}
+		console.log(all_valid);
+	}
+	document.getElementById(
+		"sum_percentage").innerHTML = sum_of_percentages.toString();
+	
+	//console.log(document.getElementById("sum_percentage_error"));
+	document.getElementById('sum_percentage_error').innerHTML = "";
+	document.getElementById('sum_percentage').style.color="black";		
+
+	if (all_valid)
+	{
+		if (sum_of_percentages!=100){
+			console.log(sum_of_percentages);
+			document.getElementById('sum_percentage_error').innerHTML = 
+			"Some of percetage should be equal to 100";
+			document.getElementById('sum_percentage').style.color="red";		
+		}
+	}
+}
+
+
+
+
 
 
 function handle_checkbox_event(event)
@@ -260,48 +294,11 @@ function handle_checkbox_event(event)
 		if (spendings[i].get_checked()){sum_of_checked +=1;}
 	}
 	document.getElementById("sum_checked").innerHTML = sum_of_checked.toString();
+	check_percetage();
 }
 
 
 
-
-
-
-
-function handle_percentage_change_event(event)
-{
-	let spending_number = get_target_number(event);
-	spendings[spending_number].validate_percentage();
-	//event.preventDefault();
-	//console.log(spendings)
-	let sum_of_percentages= 0;
-	let all_valid = true;
-	for (var i = spendings.length - 1; i >= 0; i--) 
-	{
-		console.log(i,spendings[i].get_percentage());
-		sum_of_percentages += spendings[i].get_percentage();
-		if (!spendings[i].percentage_is_valid())
-		{all_valid=false;}
-		console.log(all_valid);
-	}
-	document.getElementById(
-		"sum_percentage").innerHTML = sum_of_percentages.toString();
-	
-	//console.log(document.getElementById("sum_percentage_error"));
-	document.getElementById('sum_percentage_error').innerHTML = "";
-	
-	if (all_valid)
-	{
-		if (sum_of_percentages!=100){
-			console.log(sum_of_percentages);
-			document.getElementById('sum_percentage_error').innerHTML = 
-			"Some of percetage should be equal to 100";			
-		}
-
-	}
-
-
-}
 
 
 
@@ -318,7 +315,7 @@ for (var i = spendings.length - 1; i >= 0; i--) {
 	spendings[i].checkbox_container.addEventListener(
 		"click",(e)=>{handle_checkbox_event(e);});
 	spendings[i].percentage_element.addEventListener(
-		"input",(e)=>{handle_percentage_change_event(e);});
+		"input",(e)=>{check_percetage();});
 
 }
 
