@@ -111,6 +111,13 @@ class Requirement{
 	reset_selection()
 	{this.unselect_like();this.unselect_required();this.unselect_not_need();}
 
+	select_required()
+	{this.reset_selection();this.required_input_element.checked=true;}
+	select_like()
+	{this.reset_selection();this.like_input_element.checked=true;}
+	select_not_need()
+	{this.reset_selection();this.not_need_input_element.checked=true;}
+
 }
 
 
