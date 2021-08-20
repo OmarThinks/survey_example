@@ -136,14 +136,40 @@ class Spending{
 	get_checked()
 	{return this.checkbox_element.checked;
 	}
+	percentage_is_valid()
+	{
+		if (this.percentage_element.value == "")
+		{return true;}
+		if(parseInt(this.percentage_element.value)){ return true;}
+		else{return false;}
+	}
 	get_percentage()
 	{
+		if (this.percentage_element.value == "")
+		{return 0;}
 		if (this.get_checked())
 		{
-			try{return parseInt(this.percentage_element.value);}
-			catch{return 0;}
+			if (this.percentage_is_valid()) 
+			{return parseInt(this.percentage_element.value);}
+			else{return 0;}
 		}
 		else{return 0;}
+	}
+	validate_percentage()
+	{
+		if (this.percentage_is_valid()) 
+		{
+			console.log("it is valid");
+			this.unset_err_message();
+			return true;
+		}
+		else
+		{
+			console.log("it is not valid");
+			this.set_err_message("This should be a number");
+			return false;
+		}
+
 	}
 	
 	set_err_message(new_message)
@@ -209,6 +235,11 @@ function get_target_number(event)
 
 
 
+
+
+
+
+
 function handle_checkbox_event(event)
 {
 	//event.preventDefault();
@@ -218,12 +249,18 @@ function handle_checkbox_event(event)
 	//{spendings[spending_number].reverse_checked();}
 }
 
+
+
+
+
+
+
 function handle_percentage_change_event(event)
 {
 	let spending_number = get_target_number(event);
-	console.log(spendings[spending_number].get_percentage());
+	spendings[spending_number].validate_percentage();
 	//event.preventDefault();
-	console.log(spendings)
+	//console.log(spendings)
 }
 
 
