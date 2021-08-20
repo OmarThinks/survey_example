@@ -61,50 +61,50 @@ Select all that apply.
 	</tr>
 <tr>
 	<th>I traded on my own using online brokerage</th>
-	<td><input id="checkbox_0" type="checkbox" name="choice_0"></td>
-	<td><input id="percentage_0" type="text" name="percentage_0"> %
+	<td style="width: 20%;" id="checkbox_container_0"><input id="checkbox_0" type="checkbox" name="choice_0"></td>
+	<td style="width: 20%;"><input id="percentage_0" type="text" name="percentage_0"> %
 		<div id="err_message_0" class="err_message"></div>
 	</td>
 </tr>
 <tr>
 	<th>I used an online service to automatically invest</th>
-	<td><input id="checkbox_1" type="checkbox" name="choice_1"></td>
-	<td><input id="percentage_1" type="text" name="percentage_1"> %
+	<td style="width: 20%;" id="checkbox_container_1"><input id="checkbox_1" type="checkbox" name="choice_1"></td>
+	<td style="width: 20%;"><input id="percentage_1" type="text" name="percentage_1"> %
 		<div id="err_message_1" class="err_message"></div>
 	</td>
 </tr>
 <tr>
 	<th>A bank or other professional</th>
-	<td><input id="checkbox_2" type="checkbox" name="choice_2"></td>
-	<td><input id="percentage_2" type="text" name="percentage_2"> %
+	<td style="width: 20%;" id="checkbox_container_2"><input id="checkbox_2" type="checkbox" name="choice_2"></td>
+	<td style="width: 20%;"><input id="percentage_2" type="text" name="percentage_2"> %
 		<div id="err_message_2" class="err_message"></div>
 	</td>
 </tr>
 <tr>
 	<th>A family member</th>
-	<td><input id="checkbox_3" type="checkbox" name="choice_3"></td>
-	<td><input id="percentage_3" type="text" name="percentage_3"> %
+	<td style="width: 20%;" id="checkbox_container_3"><input id="checkbox_3" type="checkbox" name="choice_3"></td>
+	<td style="width: 20%;"><input id="percentage_3" type="text" name="percentage_3"> %
 		<div id="err_message_3" class="err_message"></div>
 	</td>
 </tr>
 <tr>
 	<th>I did not trade</th>
-	<td><input id="checkbox_4" type="checkbox" name="choice_4"></td>
-	<td><input id="percentage_4" type="text" name="percentage_4"> %
+	<td style="width: 20%;" id="checkbox_container_4"><input id="checkbox_4" type="checkbox" name="choice_4"></td>
+	<td style="width: 20%;"><input id="percentage_4" type="text" name="percentage_4"> %
 		<div id="err_message_4" class="err_message"></div>
 	</td>
 </tr>
 <tr>
 	<th>I am not sure</th>
-	<td><input id="checkbox_5" type="checkbox" name="choice_5"></td>
-	<td><input id="percentage_5" type="text" name="percentage_5"> %
+	<td id="checkbox_container_5" style="width: 20%;"><input id="checkbox_5" type="checkbox" name="choice_5"></td>
+	<td style="width: 20%;"><input id="percentage_5" type="text" name="percentage_5"> %
 		<div id="err_message_5" class="err_message"></div>
 	</td>
 </tr>
 <tr>
 	<th>Other (Please specify)</th>
-	<td style="width: 20%;"><input id="checkbox_6" type="checkbox" name="choice_6"></td>
-	<td style="width: 20%;"><input style="width: 20%;" id="percentage_6" type="text" name="percentage_6" disabled> %
+	<td id="checkbox_container_6" style="width: 20%;"><input id="checkbox_6" type="checkbox" name="choice_6"></td>
+	<td style="width: 20%;"><input id="percentage_6" type="text" name="percentage_6" disabled> %
 	<div id="err_message_6" class="err_message"></div>
 	</td>
 </tr>
@@ -127,6 +127,7 @@ class Spending{
 		this.number = spending_number;
 		this.checkbox_element = document.getElementById(
 			'checkbox_'+this.number.toString());
+		this.checkbox_container = this.checkbox_element.offsetParent;
 		this.percentage_element = document.getElementById(
 			'percentage_'+this.number.toString());
 		this.err_message_element = document.getElementById(
@@ -136,7 +137,14 @@ class Spending{
 	{return this.checkbox_element.checked;
 	}
 	get_percentage()
-	{return this.percentage_element.value;}
+	{
+		if (this.get_checked())
+		{
+			try{return parseInt(this.percentage_element.value);}
+			catch{return 0;}
+		}
+		else{return 0;}
+	}
 	
 	set_err_message(new_message)
 	{this.err_message_element.innerHTML = new_message;}
@@ -171,14 +179,14 @@ class Spending{
 	}
 	reverse_checked()
 	{
-		console.log("before", this.get_checked());
+		//console.log("before", this.get_checked());
 		if (this.get_checked()) {
-			console.log("I will uncheck");
+			//console.log("I will uncheck");
 			this.uncheck();}
 		else{
-			console.log("I will check");
+			//console.log("I will check");
 			this.check();}
-		console.log("after",  this.get_checked());
+		//console.log("after",  this.get_checked());
 	}
 }
 
@@ -203,9 +211,19 @@ function get_target_number(event)
 
 function handle_checkbox_event(event)
 {
-	event.preventDefault();
-	console.log(get_target_number(event));
-	//console.log(spendings[6].get_checked());
+	//event.preventDefault();
+	let spending_number = get_target_number(event);
+	spendings[spending_number].reverse_checked();
+	//if (event.target.nodeName == "INPUT") 
+	//{spendings[spending_number].reverse_checked();}
+}
+
+function handle_percentage_change_event(event)
+{
+	let spending_number = get_target_number(event);
+	console.log(spendings[spending_number].get_percentage());
+	//event.preventDefault();
+	console.log(spendings)
 }
 
 
@@ -220,6 +238,10 @@ for (var i = spendings.length - 1; i >= 0; i--) {
 	spendings[i].uncheck();
 	spendings[i].checkbox_element.addEventListener(
 		"click",(e)=>{handle_checkbox_event(e);});
+	spendings[i].checkbox_container.addEventListener(
+		"click",(e)=>{handle_checkbox_event(e);});
+	spendings[i].percentage_element.addEventListener(
+		"input",(e)=>{handle_percentage_change_event(e);});
 
 }
 
