@@ -111,7 +111,7 @@ Select all that apply.
 <tr>
 	<th>Number of methods selected</th>
 	<td id="sum_checked">0</td>
-	<td>0</td>
+	<td id="sum_percentage">0</td>
 </tr>
 
 </table>
@@ -120,6 +120,11 @@ Select all that apply.
 
 
 <script type="text/javascript">
+
+function isNumeric(value)
+{return /^\d+$/.test(value);}
+
+
 
 class Spending{
 	constructor(spending_number)
@@ -140,7 +145,7 @@ class Spending{
 	{
 		if (this.percentage_element.value == "")
 		{return true;}
-		if(parseInt(this.percentage_element.value)){ return true;}
+		if(isNumeric(this.percentage_element.value)){return true;}
 		else{return false;}
 	}
 	get_percentage()
@@ -266,6 +271,13 @@ function handle_percentage_change_event(event)
 	spendings[spending_number].validate_percentage();
 	//event.preventDefault();
 	//console.log(spendings)
+	let sum_of_percentages= 0;
+	for (var i = spendings.length - 1; i >= 0; i--) {
+		console.log(i,spendings[i].get_percentage());
+		sum_of_percentages += spendings[i].get_percentage();
+	}
+	document.getElementById("sum_percentage").innerHTML 
+	= sum_of_percentages.toString();
 }
 
 
