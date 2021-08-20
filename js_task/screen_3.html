@@ -97,7 +97,20 @@ class Requirement{
 		this.not_need_input_element = 
 		document.getElementById('not_need_'+requirement_number.toString());
 		this.not_need_input_cell = this.not_need_input_element.offsetParent;
+
+		this.selected=0;
 	}
+
+	unselect_required()
+	{this.required_input_element.checked=false;}
+	unselect_like()
+	{this.like_input_element.checked=false;}
+	unselect_not_need()
+	{this.not_need_input_element.checked=false;}
+
+	reset_selection()
+	{this.unselect_like();this.unselect_required();this.unselect_not_need();}
+
 }
 
 
@@ -120,7 +133,21 @@ requirements[0] = new Requirement(0);
 requirements[1] = new Requirement(1);
 
 
-console.log(requirements);
+
+
+
+
+
+
+
+//console.log(requirements);
+
+
+
+
+for (var i = requirements.length - 1; i >= 0; i--) {
+	requirements[i].reset_selection();
+}
 
 
 
