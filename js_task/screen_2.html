@@ -103,9 +103,9 @@ Select all that apply.
 </tr>
 <tr>
 	<th>Other (Please specify)</th>
-	<td><input id="checkbox_6" type="checkbox" name="choice_6"></td>
-	<td><input id="percentage_6" type="text" name="percentage_6" disabled> %
-		<p id="err_message_6" class="err_message">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+	<td style="width: 20%;"><input id="checkbox_6" type="checkbox" name="choice_6"></td>
+	<td style="width: 20%;"><input style="width: 20%;" id="percentage_6" type="text" name="percentage_6" disabled> %
+	<div id="err_message_6" class="err_message"></div>
 	</td>
 </tr>
 <tr>
@@ -133,7 +133,7 @@ class Spending{
 			'err_message_'+this.number.toString());
 	}
 	get_checked()
-	{return this.checkbox_element.ckecked;
+	{return this.checkbox_element.checked;
 	}
 	get_percentage()
 	{return this.percentage_element.value;}
@@ -143,6 +143,10 @@ class Spending{
 	unset_err_message()
 	{this.set_err_message("");}
 	
+	set_percentage(new_value){
+		this.percentage_element.value=new_value;
+
+	}
 	enable_percentage(new_message)
 	{
 		this.percentage_element.disabled = false;
@@ -152,26 +156,29 @@ class Spending{
 	disable_percentage(new_message)
 	{
 		this.percentage_element.disabled = true;
+		this.percentage_element.value="";
 		this.unset_err_message();
 	}
 	check()
 	{
-		this.checkbox_element.ckecked = true;
+		this.checkbox_element.checked = true;
 		this.enable_percentage();
 	}
 	uncheck()
 	{
-		this.checkbox_element.ckecked = false;
+		this.checkbox_element.checked = false;
 		this.disable_percentage();
 	}
 	reverse_checked()
 	{
-		//get_checked();
-		//console.log("I will reverse checked ", this);
-		//console.log(this.get_checked);
-		//console.log(this.gett_checked);
-		if (this.get_checked()) {this.uncheck()}
-		else{this.check();}
+		console.log("before", this.get_checked());
+		if (this.get_checked()) {
+			console.log("I will uncheck");
+			this.uncheck();}
+		else{
+			console.log("I will check");
+			this.check();}
+		console.log("after",  this.get_checked());
 	}
 }
 
@@ -188,18 +195,17 @@ spendings[6] = new Spending(6);
 
 function get_target_number(event)
 {
-	event.preventDefault();
-	let element_id = event.target.id;
-	let splitted = element_id.split("_");
-	//console.log();
+	let splitted = event.target.id.split("_");
 	return parseInt(splitted[splitted.length-1]);
 }
 
 
 
-function hand_checked_event(event)
+function handle_checkbox_event(event)
 {
+	event.preventDefault();
 	console.log(get_target_number(event));
+	//console.log(spendings[6].get_checked());
 }
 
 
@@ -211,8 +217,10 @@ console.log(spendings);
 
 
 for (var i = spendings.length - 1; i >= 0; i--) {
+	spendings[i].uncheck();
 	spendings[i].checkbox_element.addEventListener(
-		"click",hand_checked_event);
+		"click",(e)=>{handle_checkbox_event(e);});
+
 }
 
 
