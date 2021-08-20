@@ -57,29 +57,78 @@ td{background: white;text-align: center;}
 	<tr>
 		<td class="no-border"></td>
 		<th colspan="3" style="text-align: center;">Preference</th>
+		<th class="payment-plan-cell" colspan="3" style="text-align: center;">Willingness to Pay</th>
 	</tr>
 	<tr>
 		<td class="no-border"></td>
 		<th style="text-align: center;">Must have</th>
 		<th style="text-align: center;">Like</th>
 		<th style="text-align: center;">Do Not Need</th>
+		<th class="payment-plan-cell" style="text-align: center;">Would Pay</th>
+		<th class="payment-plan-cell" style="text-align: center;">Might Pay</th>
+		<th class="payment-plan-cell" style="text-align: center;">Expect For Free</th>
 	</tr>
 	<tr>
-		<th >Biometrics</th>
-		<td ><input type="radio" id="required_0"></td>
-		<td ><input type="radio" id="like_0"></td>
-		<td ><input type="radio" id="not_need_0"></td>
+		<th>Biometrics</th>
+		<td><input type="radio" id="required_0"></td>
+		<td><input type="radio" id="like_0"></td>
+		<td><input type="radio" id="not_need_0"></td>
+		<td class="payment-plan-cell" ><input type="radio" id="would_0"></td>
+		<td class="payment-plan-cell" ><input type="radio" id="might_0"></td>
+		<td class="payment-plan-cell" ><input type="radio" id="free_0"></td>
 	</tr>
 	<tr>
-		<th >ID Card Reader</th>
-		<td ><input type="radio" id="required_1"></td>
-		<td ><input type="radio" id="like_1"></td>
-		<td ><input type="radio" id="not_need_1"></td>
+		<th>ID Card Reader</th>
+		<td><input type="radio" id="required_1"></td>
+		<td><input type="radio" id="like_1"></td>
+		<td><input type="radio" id="not_need_1"></td>
+		<td class="payment-plan-cell" ><input type="radio" id="would_1"></td>
+		<td class="payment-plan-cell"><input type="radio" id="might_1"></td>
+		<td class="payment-plan-cell"><input type="radio" id="free_1"></td>
 	</tr>
 </table>
 
 
 <script type="text/javascript">
+
+
+
+class PaymentPlan{
+	constructor(requirement_number)
+	{
+		this.requirement_number = requirement_number;
+		
+		this.would_input_element = 
+		document.getElementById('would_'+requirement_number.toString());
+		console.log(this.would_input_element);
+
+		this.would_input_cell = this.would_input_element.offsetParent;
+		console.log(this.would_input_cell);
+		this.would_input_cell.id = 
+		"would_cell_"+requirement_number.toString();
+
+		this.might_input_element = 
+		document.getElementById('might_'+requirement_number.toString());
+		this.might_input_cell = this.might_input_element.offsetParent;
+		this.might_input_cell.id = 
+		"might_cell_"+requirement_number.toString();
+
+		this.free_input_element = 
+		document.getElementById('free_'+requirement_number.toString());
+		this.free_input_cell = this.free_input_element.offsetParent;
+		this.free_input_cell.id = 
+		"free_cell_"+requirement_number.toString();
+
+		this.selected=false;
+		this.displayed=false;
+	}
+
+}
+
+
+
+
+
 
 class Requirement{
 	constructor(requirement_number)
@@ -105,6 +154,7 @@ class Requirement{
 		"not_need_cell_"+requirement_number.toString();
 
 		this.selected=false;
+		this.payment_plan = new PaymentPlan(requirement_number);
 	}
 
 	unselect_required()
@@ -136,11 +186,16 @@ class Requirement{
 		this.selected="not_need";
 	}
 
+
+
 }
 
 
 
 
+
+
+payment_plan_visibility = "table-cell";
 
 
 
@@ -152,6 +207,17 @@ requirements[0] = new Requirement(0);
 requirements[1] = new Requirement(1);
 
 
+
+function hide_payment_plan()
+{
+	let cells=document.getElementsByClassName("payment-plan-cell");
+	for (var i = cells.length - 1; i >= 0; i--) {
+		cells[i].style.display="none";
+	}
+	payment_plan_visibility="none";
+}
+
+hide_payment_plan();
 
 
 
@@ -198,7 +264,7 @@ function handle_selection(event)
 	{all_selected()}
 }
 
-//console.log(requirements);
+console.log(requirements);
 
 
 
