@@ -110,8 +110,8 @@ Select all that apply.
 </tr>
 <tr>
 	<th>Number of methods selected</th>
-	<td></td>
-	<td></td>
+	<td id="sum_checked">0</td>
+	<td>0</td>
 </tr>
 
 </table>
@@ -247,6 +247,11 @@ function handle_checkbox_event(event)
 	spendings[spending_number].reverse_checked();
 	//if (event.target.nodeName == "INPUT") 
 	//{spendings[spending_number].reverse_checked();}
+	let sum_of_checked = 0;
+	for (var i = spendings.length - 1; i >= 0; i--) {
+		if (spendings[i].get_checked()){sum_of_checked +=1;}
+	}
+	document.getElementById("sum_checked").innerHTML = sum_of_checked.toString();
 }
 
 
