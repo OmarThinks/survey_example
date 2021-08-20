@@ -88,24 +88,31 @@ Select all that apply.
 	</td>
 </tr>
 <tr>
-	<th>I did not trade</th>
+	<th>I did not trade, and do not intend</th>
 	<td style="width: 20%;" id="checkbox_container_4"><input id="checkbox_4" type="checkbox" name="choice_4"></td>
 	<td style="width: 20%;"><input id="percentage_4" type="text" name="percentage_4"> %
 		<div id="err_message_4" class="err_message"></div>
 	</td>
 </tr>
 <tr>
-	<th>I am not sure</th>
-	<td id="checkbox_container_5" style="width: 20%;"><input id="checkbox_5" type="checkbox" name="choice_5"></td>
+	<th>I did not trade, but I intend</th>
+	<td style="width: 20%;" id="checkbox_container_5"><input id="checkbox_5" type="checkbox" name="choice_5"></td>
 	<td style="width: 20%;"><input id="percentage_5" type="text" name="percentage_5"> %
 		<div id="err_message_5" class="err_message"></div>
 	</td>
 </tr>
 <tr>
-	<th>Other (Please specify)</th>
+	<th>I am not sure</th>
 	<td id="checkbox_container_6" style="width: 20%;"><input id="checkbox_6" type="checkbox" name="choice_6"></td>
-	<td style="width: 20%;"><input id="percentage_6" type="text" name="percentage_6" disabled> %
-	<div id="err_message_6" class="err_message"></div>
+	<td style="width: 20%;"><input id="percentage_6" type="text" name="percentage_6"> %
+		<div id="err_message_6" class="err_message"></div>
+	</td>
+</tr>
+<tr>
+	<th>Other (Please specify)</th>
+	<td id="checkbox_container_7" style="width: 20%;"><input id="checkbox_7" type="checkbox" name="choice_7"></td>
+	<td style="width: 20%;"><input id="percentage_7" type="text" name="percentage_7" disabled> %
+	<div id="err_message_7" class="err_message"></div>
 	</td>
 </tr>
 <tr>
@@ -231,6 +238,7 @@ spendings[3] = new Spending(3);
 spendings[4] = new Spending(4);
 spendings[5] = new Spending(5);
 spendings[6] = new Spending(6);
+spendings[7] = new Spending(7);
 
 
 
