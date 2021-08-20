@@ -6,6 +6,7 @@
 <style type="text/css">
 *{
 	font-family: arial;
+	transition: .5s;
 }
 
 
@@ -40,6 +41,20 @@ td{background: white;text-align: center;}
 
 #percentage_6
 {}
+.nav_button
+{
+	margin: 2em;padding: .8em;font-size: 1.2em;
+	font-weight: bold;background: blue;
+	color: white;
+	border-radius: 1em;
+	border:solid 2px blue;
+}
+
+.nav_button:hover
+{
+	color: black;
+	background: lightblue;
+}
 
 </style>
 
@@ -47,7 +62,7 @@ td{background: white;text-align: center;}
 </head>
 <body>
 
-<h1>New Braanch Requirements Checklist:</h1>
+<h1>New Branch Requirements Checklist:</h1>
 
 
 
@@ -89,6 +104,16 @@ td{background: white;text-align: center;}
 </table>
 
 
+
+<div style="display: flex;justify-content: center;">
+<a href="screen_1.html">
+	
+	<button class="nav_button">&lt;&lt; Back</button>
+</a>
+<a href="">
+	<button class="nav_button">Continue &gt;&gt;</button>
+</a>
+</div>
 
 <script type="text/javascript">
 

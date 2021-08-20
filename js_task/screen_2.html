@@ -5,6 +5,7 @@
 <style type="text/css">
 *{
 	font-family: arial;
+	transition: .5s;
 }
 
 
@@ -39,6 +40,27 @@ td{background: white;text-align: center;}
 
 #percentage_6
 {}
+
+
+a, a:hover,a:visited, a:active{text-decoration: none}
+
+
+.nav_button
+{
+	margin: 2em;padding: .8em;font-size: 1.2em;
+	font-weight: bold;background: blue;
+	color: white;
+	border-radius: 1em;
+	border:solid 2px blue;
+}
+
+.nav_button:hover
+{
+	color: black;
+	background: lightblue;
+}
+
+
 
 </style>
 
@@ -126,6 +148,16 @@ Select all that apply.
 
 </table>
 
+
+<div style="display: flex;justify-content: center;">
+<a href="screen_1.html">
+	
+	<button class="nav_button">&lt;&lt; Back</button>
+</a>
+<a href="screen_3.html">
+	<button class="nav_button">Continue &gt;&gt;</button>
+</a>
+</div>
 
 
 
