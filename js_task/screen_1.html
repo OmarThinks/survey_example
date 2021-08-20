@@ -150,8 +150,10 @@ class Package {
   	}
   	catch{}
   }
-  paint_background_color(color, insist=false)
+  paint_background_color(bgcolor, insist=false)
   {
+  	let color = "black";
+  	if (bgcolor == "blue") {color="white";}
   	let will_paint = false;
   	if(selected_package == this.number)
   	{
@@ -161,8 +163,12 @@ class Package {
   	else{will_paint = true;}
   	if (will_paint)
   	{
+
 	  	for (var i = this.elements.length - 1; i >= 0; i--) 
-	  	{this.elements[i].style.backgroundColor = color;}  		
+	  	{
+	  		this.elements[i].style.backgroundColor = bgcolor;
+	  		this.elements[i].style.color = color;
+	  	}  		
   	}
   }
   add_event_listener_to_elements(event_name, to_do)
@@ -233,7 +239,7 @@ function select_package(package_number)
 		if (packages[i].number == package_number) {continue;}
 		packages[i].unselect();
 	}
-	packages[package_number].paint_background_color("grey", true);
+	packages[package_number].paint_background_color("blue", true);
 	//console.log("selected_package",selected_package);
 	clear_backgrounds(true);
 }
