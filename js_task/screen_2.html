@@ -125,7 +125,7 @@ class Spending{
 	constructor(spending_number)
 	{
 		this.number = spending_number;
-		this.ckeckbox_element = document.getElementById(
+		this.checkbox_element = document.getElementById(
 			'checkbox_'+this.number.toString());
 		this.percentage_element = document.getElementById(
 			'percentage_'+this.number.toString());
@@ -133,7 +133,8 @@ class Spending{
 			'err_message_'+this.number.toString());
 	}
 	get_checked()
-	{return this.ckeckbox_element.ckecked;}
+	{return this.checkbox_element.ckecked;
+	}
 	get_percentage()
 	{return this.percentage_element.value;}
 	
@@ -155,13 +156,22 @@ class Spending{
 	}
 	check()
 	{
-		this.ckeckbox_element.ckecked = true;
+		this.checkbox_element.ckecked = true;
 		this.enable_percentage();
 	}
 	uncheck()
 	{
-		this.ckeckbox_element.ckecked = false;
+		this.checkbox_element.ckecked = false;
 		this.disable_percentage();
+	}
+	reverse_checked()
+	{
+		//get_checked();
+		//console.log("I will reverse checked ", this);
+		//console.log(this.get_checked);
+		//console.log(this.gett_checked);
+		if (this.get_checked()) {this.uncheck()}
+		else{this.check();}
 	}
 }
 
@@ -175,8 +185,35 @@ spendings[5] = new Spending(5);
 spendings[6] = new Spending(6);
 
 
+
+function get_target_number(event)
+{
+	event.preventDefault();
+	let element_id = event.target.id;
+	let splitted = element_id.split("_");
+	//console.log();
+	return parseInt(splitted[splitted.length-1]);
+}
+
+
+
+function hand_checked_event(event)
+{
+	console.log(get_target_number(event));
+}
+
+
+
+
+
 console.log(spendings);
 
+
+
+for (var i = spendings.length - 1; i >= 0; i--) {
+	spendings[i].checkbox_element.addEventListener(
+		"click",hand_checked_event);
+}
 
 
 
