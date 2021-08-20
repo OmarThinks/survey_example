@@ -55,26 +55,26 @@ td{background: white;text-align: center;}
 
 <table>
 	<tr>
-		<td class="no-border" style="width: 55%;"></td>
+		<td class="no-border"></td>
 		<th colspan="3" style="text-align: center;">Preference</th>
 	</tr>
 	<tr>
-		<td class="no-border" style="width: 55%;"></td>
-		<th style="text-align: center;width: 15%;">Must have</th>
-		<th style="text-align: center;width: 15%;">Like</th>
-		<th style="text-align: center;width: 15%;">Do Not Need</th>
+		<td class="no-border"></td>
+		<th style="text-align: center;">Must have</th>
+		<th style="text-align: center;">Like</th>
+		<th style="text-align: center;">Do Not Need</th>
 	</tr>
 	<tr>
-		<th style="width: 55%;">Biometrics</th>
-		<td style="width: 15%;"><input type="radio" id="required_0"></td>
-		<td style="width: 15%;"><input type="radio" id="like_0"></td>
-		<td style="width: 15%;"><input type="radio" id="not_need_0"></td>
+		<th >Biometrics</th>
+		<td ><input type="radio" id="required_0"></td>
+		<td ><input type="radio" id="like_0"></td>
+		<td ><input type="radio" id="not_need_0"></td>
 	</tr>
 	<tr>
-		<th style="width: 55%;">ID Card Reader</th>
-		<td style="width: 15%;"><input type="radio" id="required_1"></td>
-		<td style="width: 15%;"><input type="radio" id="like_1"></td>
-		<td style="width: 15%;"><input type="radio" id="not_need_1"></td>
+		<th >ID Card Reader</th>
+		<td ><input type="radio" id="required_1"></td>
+		<td ><input type="radio" id="like_1"></td>
+		<td ><input type="radio" id="not_need_1"></td>
 	</tr>
 </table>
 
@@ -104,7 +104,7 @@ class Requirement{
 		this.not_need_input_cell.id = 
 		"not_need_cell_"+requirement_number.toString();
 
-		this.selected=0;
+		this.selected=false;
 	}
 
 	unselect_required()
@@ -169,6 +169,15 @@ function get_target_name(event)
 	return splitted[0];
 }
 
+
+
+
+
+function all_selected()
+{}
+
+
+
 function handle_selection(event)
 {
 	let target_number = get_target_number(event);
@@ -180,6 +189,13 @@ function handle_selection(event)
 	{requirements[target_number].select_like();}
 	else if (target_name=="not")
 	{requirements[target_number].select_not_need();}
+	
+	let is_all_selected = true;
+
+	for (var i = requirements.length - 1; i >= 0; i--) 
+	{if (!requirements[i].selected){is_all_selected=false;}}
+	if (is_all_selected)
+	{all_selected()}
 }
 
 //console.log(requirements);
