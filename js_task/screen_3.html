@@ -123,6 +123,37 @@ class PaymentPlan{
 		this.displayed=false;
 	}
 
+
+
+
+	unselect_would()
+	{this.would_input_element.checked=false;}
+	unselect_might()
+	{this.might_input_element.checked=false;}
+	unselect_free()
+	{this.free_input_element.checked=false;}
+
+	reset_selection()
+	{this.unselect_would();this.unselect_might();this.unselect_free();}
+
+	select_would()
+	{
+		this.reset_selection();
+		this.would_input_element.checked=true;
+		this.selected="would";
+	}
+	select_might()
+	{
+		this.reset_selection();
+		this.might_input_element.checked=true;
+		this.selected="might";
+	}
+	select_free()
+	{
+		this.reset_selection();
+		this.free_input_element.checked=true;
+		this.selected="free";
+	}
 }
 
 
@@ -186,8 +217,6 @@ class Requirement{
 		this.selected="not_need";
 	}
 
-
-
 }
 
 
@@ -236,7 +265,6 @@ function hide_payment_plan()
 	payment_plan_visibility="none";
 }
 
-hide_payment_plan();
 
 
 
@@ -261,6 +289,14 @@ function handle_selection(event)
 	{requirements[target_number].select_like();}
 	else if (target_name=="not")
 	{requirements[target_number].select_not_need();}
+	
+	else if (target_name=="would")
+	{requirements[target_number].payment_plan.select_would();return;}
+	else if (target_name=="might")
+	{requirements[target_number].payment_plan.select_might();return;}
+	else if (target_name=="free")
+	{requirements[target_number].payment_plan.select_free();return;}
+	
 	
 	let is_all_selected = true;
 
@@ -292,7 +328,32 @@ for (var i = requirements.length - 1; i >= 0; i--) {
 	requirements[i].not_need_input_cell.addEventListener(
 		"click",handle_selection);
 
+	requirements[i].payment_plan.reset_selection();
+	
+
+	requirements[i].payment_plan.would_input_element.addEventListener(
+		"click",handle_selection);
+	requirements[i].payment_plan.would_input_cell.addEventListener(
+		"click",handle_selection);
+	
+	requirements[i].payment_plan.might_input_element.addEventListener(
+		"click",handle_selection);
+	requirements[i].payment_plan.might_input_cell.addEventListener(
+		"click",handle_selection);
+	
+	requirements[i].payment_plan.free_input_element.addEventListener(
+		"click",handle_selection);
+	requirements[i].payment_plan.free_input_cell.addEventListener(
+		"click",handle_selection);
+	
+
+
+
+
+
 }
+
+hide_payment_plan();
 
 
 
