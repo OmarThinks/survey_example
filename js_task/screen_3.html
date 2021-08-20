@@ -208,18 +208,6 @@ requirements[1] = new Requirement(1);
 
 
 
-function hide_payment_plan()
-{
-	let cells=document.getElementsByClassName("payment-plan-cell");
-	for (var i = cells.length - 1; i >= 0; i--) {
-		cells[i].style.display="none";
-	}
-	payment_plan_visibility="none";
-}
-
-hide_payment_plan();
-
-
 
 
 
@@ -239,9 +227,27 @@ function get_target_name(event)
 
 
 
-function all_selected()
-{}
+function hide_payment_plan()
+{
+	let cells=document.getElementsByClassName("payment-plan-cell");
+	for (var i = cells.length - 1; i >= 0; i--) {
+		cells[i].style.display="none";
+	}
+	payment_plan_visibility="none";
+}
 
+hide_payment_plan();
+
+
+
+function view_payment_plan()
+{
+	let cells=document.getElementsByClassName("payment-plan-cell");
+	for (var i = cells.length - 1; i >= 0; i--) {
+		cells[i].style.display="table-cell";
+	}
+	payment_plan_visibility="table-cell";
+}
 
 
 function handle_selection(event)
@@ -261,7 +267,7 @@ function handle_selection(event)
 	for (var i = requirements.length - 1; i >= 0; i--) 
 	{if (!requirements[i].selected){is_all_selected=false;}}
 	if (is_all_selected)
-	{all_selected()}
+	{view_payment_plan()}
 }
 
 console.log(requirements);
