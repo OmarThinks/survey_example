@@ -171,7 +171,15 @@ function get_target_name(event)
 
 function handle_selection(event)
 {
-	console.log(get_target_number(event), get_target_name(event));
+	let target_number = get_target_number(event);
+	let target_name = get_target_name(event);
+
+	if (target_name=="required")
+	{requirements[target_number].select_required();}
+	else if (target_name=="like")
+	{requirements[target_number].select_like();}
+	else if (target_name=="not")
+	{requirements[target_number].select_not_need();}
 }
 
 //console.log(requirements);
@@ -183,9 +191,17 @@ for (var i = requirements.length - 1; i >= 0; i--) {
 	requirements[i].reset_selection();
 	requirements[i].required_input_element.addEventListener(
 		"click",handle_selection);
+	requirements[i].required_input_cell.addEventListener(
+		"click",handle_selection);
+	
 	requirements[i].like_input_element.addEventListener(
 		"click",handle_selection);
+	requirements[i].like_input_cell.addEventListener(
+		"click",handle_selection);
+	
 	requirements[i].not_need_input_element.addEventListener(
+		"click",handle_selection);
+	requirements[i].not_need_input_cell.addEventListener(
 		"click",handle_selection);
 
 }
