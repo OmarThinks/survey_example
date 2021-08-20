@@ -89,14 +89,20 @@ class Requirement{
 		this.required_input_element = 
 		document.getElementById('required_'+requirement_number.toString());
 		this.required_input_cell = this.required_input_element.offsetParent;
+		this.required_input_cell.id = 
+		"required_cell_"+requirement_number.toString();
 
 		this.like_input_element = 
 		document.getElementById('like_'+requirement_number.toString());
 		this.like_input_cell = this.like_input_element.offsetParent;
-		
+		this.like_input_cell.id = 
+		"like_cell_"+requirement_number.toString();
+
 		this.not_need_input_element = 
 		document.getElementById('not_need_'+requirement_number.toString());
 		this.not_need_input_cell = this.not_need_input_element.offsetParent;
+		this.not_need_input_cell.id = 
+		"not_need_cell_"+requirement_number.toString();
 
 		this.selected=0;
 	}
@@ -112,23 +118,29 @@ class Requirement{
 	{this.unselect_like();this.unselect_required();this.unselect_not_need();}
 
 	select_required()
-	{this.reset_selection();this.required_input_element.checked=true;}
+	{
+		this.reset_selection();
+		this.required_input_element.checked=true;
+		this.selected="required";
+	}
 	select_like()
-	{this.reset_selection();this.like_input_element.checked=true;}
+	{
+		this.reset_selection();
+		this.like_input_element.checked=true;
+		this.selected="like";
+	}
 	select_not_need()
-	{this.reset_selection();this.not_need_input_element.checked=true;}
+	{
+		this.reset_selection();
+		this.not_need_input_element.checked=true;
+		this.selected="not_need";
+	}
 
 }
 
 
 
 
-
-function get_target_number(event)
-{
-	let splitted = event.target.id.split("_");
-	return parseInt(splitted[splitted.length-1]);
-}
 
 
 
@@ -145,7 +157,22 @@ requirements[1] = new Requirement(1);
 
 
 
+function get_target_number(event)
+{
+	let splitted = event.target.id.split("_");
+	return parseInt(splitted[splitted.length-1]);
+}
 
+function get_target_name(event)
+{
+	let splitted = event.target.id.split("_");
+	return splitted[0];
+}
+
+function handle_selection(event)
+{
+	console.log(get_target_number(event), get_target_name(event));
+}
 
 //console.log(requirements);
 
@@ -154,6 +181,13 @@ requirements[1] = new Requirement(1);
 
 for (var i = requirements.length - 1; i >= 0; i--) {
 	requirements[i].reset_selection();
+	requirements[i].required_input_element.addEventListener(
+		"click",handle_selection);
+	requirements[i].like_input_element.addEventListener(
+		"click",handle_selection);
+	requirements[i].not_need_input_element.addEventListener(
+		"click",handle_selection);
+
 }
 
 
