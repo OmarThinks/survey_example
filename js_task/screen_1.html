@@ -5,8 +5,12 @@
 
 <style type="text/css">
 
+
+
+
 *{
 	font-family: arial;
+	transition: .5s;
 }
 
 
@@ -40,6 +44,23 @@ td{background: white;}
 .package_selector_table_element:hover
 {background: lightblue;}
 
+
+
+
+.nav_button
+{
+	margin: 2em;padding: .8em;font-size: 1.2em;
+	font-weight: bold;background: blue;
+	color: white;
+	border-radius: 1em;
+	border:solid 2px blue;
+}
+
+.nav_button:hover
+{
+	color: black;
+	background: lightblue;
+}
 
 </style>
 
@@ -119,8 +140,8 @@ td{background: white;}
 </table>
 
 
-<div>
-	<button></button>
+<div style="display: flex;justify-content: center;">
+	<button class="nav_button">Continue &gt;&gt;</button>
 </div>
 
 
