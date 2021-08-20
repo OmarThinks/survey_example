@@ -79,7 +79,52 @@ td{background: white;text-align: center;}
 </table>
 
 
+<script type="text/javascript">
 
+class Requirement{
+	constructor(requirement_number)
+	{
+		this.requirement_number = requirement_number;
+		
+		this.required_input_element = 
+		document.getElementById('required_'+requirement_number.toString());
+		this.required_input_cell = this.required_input_element.offsetParent;
+
+		this.like_input_element = 
+		document.getElementById('like_'+requirement_number.toString());
+		this.like_input_cell = this.like_input_element.offsetParent;
+		
+		this.not_need_input_element = 
+		document.getElementById('not_need_'+requirement_number.toString());
+		this.not_need_input_cell = this.not_need_input_element.offsetParent;
+	}
+}
+
+
+
+
+
+function get_target_number(event)
+{
+	let splitted = event.target.id.split("_");
+	return parseInt(splitted[splitted.length-1]);
+}
+
+
+
+
+
+
+var requirements = [];
+requirements[0] = new Requirement(0);
+requirements[1] = new Requirement(1);
+
+
+console.log(requirements);
+
+
+
+</script>
 
 
 
