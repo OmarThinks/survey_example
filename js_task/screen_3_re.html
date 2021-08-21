@@ -199,12 +199,31 @@ class DataRepresentation
 		return table_heading
 	}
 
+	render_row(index)
+	{
+		console.log("index", index);
+		console.log("rows", this.rows);
+		let row = this.rows[i];
+		console.log("row", row);
+		let table_row = "<tr>";
+		table_row += "<th>"+row.text+"</th>";
+		for (var i = row.preferences.options.length - 1; i >= 0; i--) {
+			table_row += `<td><input type="radio"><td>`;
+			//row.preferences.options[i]
+		}
+		table_row += "</tr>";
+		return table_row;
+
+	}
 	render()
 	{
 		let table="<table>";
 		table+=this.render_table_heading();
 		table += "</table>";
 		document.getElementById('table_container').innerHTML=table;
+		for (var i = this.rows.length - 1; i >= 0; i--) {
+			table += this.render_row(i);
+		}
 		return table;
 
 	}
