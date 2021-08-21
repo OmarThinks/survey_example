@@ -395,9 +395,15 @@ function get_requiremnt_from_input()
 
 
 
-function get_target_requirement(event)
+function get_target_requirement(target)
 {
-	if (target.value==0) {}
+	let classList = target.classList;
+	//console.log(classList);
+	let last_clas_name = classList[classList.length -1];
+	if (!last_clas_name.includes("payment")){
+		return last_clas_name;
+	}
+	return last_clas_name.split("_")[0]
 }
 
 
@@ -410,7 +416,9 @@ function handle_click(event)
 	if (target.nodeName=="TD") {target=target.children[0];}
 	//No we have target, equal to the input field
 	let is_payment = get_is_payment(target);
-	console.log(is_payment);
+	//console.log(is_payment);
+	//console.log(target);
+	console.log(get_target_requirement(target));
 
 
 }
