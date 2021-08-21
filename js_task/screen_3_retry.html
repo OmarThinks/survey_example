@@ -376,8 +376,44 @@ function view_payment()
 //console.log(form_1.length);
 
 
+
+
+function get_is_payment(target)
+{
+	//console.log("calssList",event.target.classList[0]);
+	if (target.classList[0].includes("payment")){return true}
+	return false;
+}
+
+
+
+
+
+function get_requiremnt_from_input()
+{}
+
+
+
+
+function get_target_requirement(event)
+{
+	if (target.value==0) {}
+}
+
+
+
+
+
 function handle_click(event)
-{console.log(event);}
+{
+	let target = event.target;
+	if (target.nodeName=="TD") {target=target.children[0];}
+	//No we have target, equal to the input field
+	let is_payment = get_is_payment(target);
+	console.log(is_payment);
+
+
+}
 
 
 
@@ -387,9 +423,13 @@ for (key in requirements)
 {
 	req = requirements[key];
 	for (var i = req.input_fields.length - 1; i >= 0; i--) {
-		req.input_fields[i].addEventListener(
-			"click",(e)=>{handle_click(e);});
+		//req.input_fields[i].addEventListener(
+		//	"click",(e)=>{handle_click(e);});
 		req.input_parents_fields[i].addEventListener(
+			"click",(e)=>{handle_click(e);});
+		//req.payment_fields[i].addEventListener(
+		//	"click",(e)=>{handle_click(e);});
+		req.payment_parents_fields[i].addEventListener(
 			"click",(e)=>{handle_click(e);});
 	}
 
@@ -406,7 +446,7 @@ for (key in requirements)
 
 
 
-
+console.log("_payment".includes("payment"));
 
 
 </script>
