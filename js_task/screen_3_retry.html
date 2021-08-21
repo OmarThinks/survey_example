@@ -418,9 +418,13 @@ function handle_click(event)
 	let is_payment = get_is_payment(target);
 	//console.log(is_payment);
 	//console.log(target);
+	
 	let requirement_name = get_target_requirement(target)
-	console.log(requirement_name);
-	console.log(target.value);
+	let selection_value = target.value
+
+	if (is_payment)
+	{requirements[requirement_name].set_payment(selection_value);}
+	else{requirements[requirement_name].set_input(selection_value);}
 }
 
 
