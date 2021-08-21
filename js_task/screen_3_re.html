@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Screen 3</title>
+</head>
+<style type="text/css">
+*{
+	font-family: arial;
+	transition: .5s;
+}
+
+
+table
+{
+	width: 100%;
+	margin: 0px;
+	border-collapse: collapse;
+
+}
+
+th,td{
+	align-content: center;
+	
+	margin: 0px;
+	padding: .5em .75em;
+	font-size: 1.3em;
+	border: 0px;
+	border: solid 1px black;
+}
+
+
+th{background: lime;text-align: left;}
+td{background: white;text-align: center;}
+.no-border{
+	border-width: 0px;
+}
+.err_message{
+	color: red;
+}
+
+
+#percentage_6
+{}
+.nav_button
+{
+	margin: 2em;padding: .8em;font-size: 1.2em;
+	font-weight: bold;background: blue;
+	color: white;
+	border-radius: 1em;
+	border:solid 2px blue;
+}
+
+.nav_button:hover
+{
+	color: black;
+	background: lightblue;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 3px dotted darkblue;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  transition: .0s;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+
+
+
+
+
+
+
+
+
+</style>
+
+
+</head>
+<body>
+
+<h1>New Branch Requirements Checklist:</h1>
+
+<div id="table_container">
+	
+</div>
+
+
+
+
+
+
+<div style="display: flex;justify-content: center;">
+<a href="screen_1.html">
+	
+	<button class="nav_button">&lt;&lt; Back</button>
+</a>
+<a href="">
+	<button class="nav_button">Continue &gt;&gt;</button>
+</a>
+</div>
+
+
+<script type="text/javascript">
+
+const data = ["ID Card Reader","Biometrics"];
+
+
+
+class RadioChoicesGroup
+{
+	constructor(options)
+	{
+		this.options = options;
+		this.deselect();
+		this.chosen_index=-1;//not chosen
+		this.chosen=false;
+	}
+	deselect()
+	{
+		this.chosen_index=-1;//not chosen
+		this.chosen=false;
+	}
+	select(index)
+	{
+		this.chosen_index = index;
+		this.chosen=false;
+	}
+	is_chosen()
+	{return this.chosen;}
+}
+
+
+class DataRow
+{
+	constructor(index)
+	{
+		this.number = index;
+		this.text = data[index];
+		this.preferences = new RadioChoicesGroup(
+			["Do Not Need", "Like", "Must have"]
+			);
+	}
+}
+
+
+class DataRepresentation
+{
+	constructor()
+	{
+		this.rows= [];
+		for (var i = data.length - 1; i >= 0; i--) {
+			this.rows[i] = new DataRow(i);
+		}
+		this.table=this.render()
+	}
+
+
+
+	render_table_heading()
+	{
+		let table_heading = "<tr><td></td>";
+		for (var i = this.rows[0].preferences.options.length - 1; i >= 0; i--) 
+		{table_heading+="<th>"+this.rows[0].preferences.options[i]+"</th>";}
+		table_heading+="</tr>"
+		return table_heading
+	}
+
+	render()
+	{
+		let table="<table>";
+		table+=this.render_table_heading();
+		table += "</table>";
+		document.getElementById('table_container').innerHTML=table;
+		return table;
+
+	}
+}
+
+
+
+
+let data_representation = new DataRepresentation();
+
+data_representation.render();
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -210,6 +210,7 @@ class PaymentPlan{
 
 		this.selected=false;
 		this.displayed=false;
+		this.enabled=false;
 	}
 
 
@@ -246,16 +247,19 @@ class PaymentPlan{
 
 	display()
 	{
+		console.log("display");
 		this.would_input_element.style.display="";
 		this.would_input_cell.style.display="table-cell";
 		this.might_input_element.style.display="";
 		this.might_input_cell.style.display="table-cell";
 		this.free_input_element.style.display="";
 		this.free_input_cell.style.display="table-cell";
-		//this.reset_selection();		
+		//this.reset_selection();
+		this.displayed=true;	
 	}
 	hide()
 	{
+		console.log("hide");
 		this.would_input_element.style.display="none";
 		this.would_input_cell.style.display="none";
 		this.might_input_element.style.display="none";
@@ -263,25 +267,30 @@ class PaymentPlan{
 		this.free_input_element.style.display="none";
 		this.free_input_cell.style.display="none";
 		this.reset_selection();
+		this.displayed=false;
 	}
 	enable()
 	{
+		console.log("enble");
 		this.would_input_element.style.display="";
 		this.would_input_cell.style.background="white";
 		this.might_input_element.style.display="";
 		this.might_input_cell.style.background="white";
 		this.free_input_element.style.display="";
 		this.free_input_cell.style.background="white";
+		this.enabled=true;
 	}
 	disable()
 	{
+		console.log("disable");
 		this.would_input_element.style.display="none";
 		this.would_input_cell.style.background="grey";
 		this.might_input_element.style.display="none";
 		this.might_input_cell.style.background="grey";
 		this.free_input_element.style.display="none";
 		this.free_input_cell.style.background="grey";
-		this.reset_selection();		
+		this.reset_selection();
+		this.enabled=false;		
 	}
 }
 
@@ -322,7 +331,11 @@ class Requirement{
 	unselect_like()
 	{this.like_input_element.checked=false;}
 	unselect_not_need()
-	{this.not_need_input_element.checked=false;}
+	{
+		this.not_need_input_element.checked=false;
+		this.payment_plan.enable();
+
+	}
 
 	reset_selection()
 	{this.unselect_like();this.unselect_required();this.unselect_not_need();}
@@ -344,6 +357,7 @@ class Requirement{
 		this.reset_selection();
 		this.not_need_input_element.checked=true;
 		this.selected="not_need";
+		this.payment_plan.disable();
 	}
 
 }
@@ -467,6 +481,12 @@ function handle_selection(event)
 }
 
 //console.log(requirements);
+
+
+
+
+
+
 
 
 
