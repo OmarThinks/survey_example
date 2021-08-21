@@ -99,6 +99,7 @@ td{background: white;text-align: center;}
   visibility: visible;
 }
 
+.center_text{text-align: center;}
 
 </style>
 
@@ -116,11 +117,20 @@ td{background: white;text-align: center;}
 
 <tr>
 	<td></td>
-	<th>Must Have</th>
-	<th>Like</th>
-	<th>Do not Need</th>
+	<th class="center_text" colspan="3">Preferences</th>
+	<th class="center_text" colspan="3">Willingness to Pay</th>
 </tr>
 
+<tr>
+	<td></td>
+	<th class="center_text">Must Have</th>
+	<th class="center_text">Like</th>
+	<th class="center_text">Do not Need</th>
+	
+	<th class="center_text">Would Pay</th>
+	<th class="center_text">Might Pay</th>
+	<th class="center_text">Expect for Free</th>
+</tr>
 
 
 <tr>
@@ -128,7 +138,39 @@ td{background: white;text-align: center;}
 	<td><input type="radio" name="biometcics" form="form_1" value="must"></td>
 	<td><input type="radio" name="biometcics" form="form_1" value="like"></td>
 	<td><input type="radio" name="biometcics" form="form_1" value="not"></td>
+
+	<td>
+		<input type="radio" name="biometcics_payment" 
+		form="form_1" value="would"></td>
+	<td>
+		<input type="radio" name="biometcics_payment" 
+		form="form_1" value="might"></td>
+	<td>
+		<input type="radio" name="biometcics_payment" 
+		form="form_1" value="free">
+	</td>
 </tr>
+
+<tr>
+	<th>ID Card Reader</th>
+	<td><input type="radio" name="id_reader" form="form_1" value="must"></td>
+	<td><input type="radio" name="id_reader" form="form_1" value="like"></td>
+	<td><input type="radio" name="id_reader" form="form_1" value="not"></td>
+
+	<td>
+		<input type="radio" name="id_reader_payment" 
+		form="form_1" value="would"></td>
+	<td>
+		<input type="radio" name="id_reader_payment" 
+		form="form_1" value="might"></td>
+	<td>
+		<input type="radio" name="id_reader_payment" 
+		form="form_1" value="free">
+	</td>
+</tr>
+
+
+
 
 
 </table>
