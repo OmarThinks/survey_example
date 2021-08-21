@@ -134,15 +134,15 @@ td{background: white;text-align: center;}
 
 
 <tr>
-	<th class="payment">Biometrics</th>
-	<td class="payment biometric">
-		<input class="payment biometric" type="radio" 
+	<th class="">Biometrics</th>
+	<td class=" biometric">
+		<input class=" biometric" type="radio" 
 		name="biometric" form="form_1" value="must"></td>
-	<td class="payment biometric">
-		<input class="payment biometric" type="radio" 
+	<td class=" biometric">
+		<input class=" biometric" type="radio" 
 		name="biometric" form="form_1" value="like"></td>
-	<td class="payment biometric">
-		<input class="payment biometric" type="radio" 
+	<td class=" biometric">
+		<input class=" biometric" type="radio" 
 		name="biometric" form="form_1" value="not"></td>
 
 	<td class="payment biometric_payment">
@@ -159,14 +159,14 @@ td{background: white;text-align: center;}
 
 <tr>
 	<th>ID Card Reader</th>
-	<td class="payment idreader">
-		<input class="payment idreader" type="radio" 
+	<td class=" idreader">
+		<input class=" idreader" type="radio" 
 		name="idreader" form="form_1" value="must"></td>
-	<td class="payment idreader">
-		<input class="payment idreader" type="radio" 
+	<td class=" idreader">
+		<input class=" idreader" type="radio" 
 		name="idreader" form="form_1" value="like"></td>
-	<td class="payment idreader">
-		<input class="payment idreader" type="radio" 
+	<td class=" idreader">
+		<input class=" idreader" type="radio" 
 		name="idreader" form="form_1" value="not"></td>
 
 	<td class="payment idreader_payment">
@@ -183,6 +183,235 @@ td{background: white;text-align: center;}
 
 
 
+
+<script type="text/javascript">
+
+
+
+
+function get_inputs(value, payment=false)
+{
+	let all_inputs = document.getElementsByTagName('input');
+	let normal_inputs = [];
+	let payment_inputs = [];
+
+	for (var i = all_inputs.length - 1; i >= 0; i--) {
+		if((all_inputs[i].value=="must")||(all_inputs[i].value=="like")||
+			(all_inputs[i].value=="not"))
+		{
+			if (all_inputs[i].name==value) 
+			{normal_inputs.push(all_inputs[i]);}
+		}
+		else if(all_inputs[i].name==(value+"_payment")){
+			payment_inputs.push(all_inputs[i]);
+		}
+	}
+	if (payment) {return payment_inputs;}
+	return normal_inputs;
+}
+
+
+console.log(
+get_inputs("biometric",true));
+
+
+
+
+
+
+const rows = ["biometric","idreader"]
+
+
+
+
+class Requirement{
+	constructor(number)
+	{
+		this.number = number;
+		this.name = rows[number];
+		this.input_fields = document.getElementsByClassName(this.name);
+		this.input_parents_fields=[];
+		for (var i = this.input_fields.length - 1; i >= 0; i--) 
+		{this.input_parents_fields[i] = this.input_fields[i].offsetParent;}
+		
+		this.payment_fields = document.getElementsByClassName(this.name+"_payment");
+		
+		this.payment_parents_fields=[];
+		for (var i = this.payment_fields.length - 1; i >= 0; i--) 
+		{this.payment_parents_fields[i] = this.payment_fields[i].offsetParent;}
+
+		this.payment_disabled=false;
+	}
+
+	//Get the payment value, example: "would", or false if nothing is chosen
+	get_payment()
+	{
+		if (this.payment_disabled) {return false;}
+		for (var i = this.payment_fields.length - 1; i >= 0; i--) {
+			if (this.payment_fields[i].checked){return this.payment_fields[i].value;}
+		}
+		return false;		
+	}
+	//set the payment if payment enabled, Example Input: "would"
+	set_payment(value)
+	{
+		if (this.payment_disabled) {return;}
+		for (var i = this.payment_fields.length - 1; i >= 0; i--) {
+			if(this.payment_fields[i].value==value)
+				{
+					this.payment_fields[i].checked=true;
+					this.payment_fields[i].style.background ="cyan";
+				}
+			else{this.payment_fields[i].style.background ="white";}
+		}		
+	}
+	//Uncheck all payment fields for this requirement
+	// Repaints all backgounds with whit if enabled
+	reset_payment()
+	{
+		for (var i = this.payment_fields.length - 1; i >= 0; i--) {
+			this.payment_fields[i].checked = false;
+			if (!this.payment_disabled)
+			{this.payment_parents_fields[i].style.background= "white";}
+		}
+	}
+
+	//reset payment fields and hide the fields, and background is grey
+	disable_payment()
+	{
+		this.reset_payment();
+		for (var i = this.payment_fields.length - 1; i >= 0; i--) {
+			this.payment_fields[i].style.display="none";
+			this.payment_parents_fields[i].background="grey";
+		}
+		this.payment_disabled=true;
+	}
+	/* Concentrate
+	This enables payment
+	Payment may be already enabled, to it should not be 
+
+	*/
+	enable_payment()
+	{
+		if (this.get_payment())
+		{return;/*It is already enabled*/}
+
+		//Now it is disabled
+		for (var i = this.payment_fields.length - 1; i >= 0; i--) 
+		{
+			this.payment_fields[i].style.display="";
+			this.payment_parents_fields[i].background="white";
+		}
+		this.reset_payment();
+		this.payment_disabled=false;
+	}
+
+	// gets the input, or false if nothing is chosen, exampel: "must"
+	get_input()
+	{
+		for (var i = this.input_fields.length - 1; i >= 0; i--) {
+			if (this.input_fields[i].checked){return this.input_fields[i].value;}
+		}
+		return false;
+	}
+	//sets the input, example: "must"
+	set_input(value)
+	{
+		for (var i = this.input_fields.length - 1; i >= 0; i--) {
+			if(this.input_fields[i].value==value)
+				{
+					this.input_fields[i].checked=true;
+					this.input_fields[i].style.background ="cyan";
+				}
+			else{this.input_fields[i].style.background ="white";}
+		}
+		if (value=="not") {this.disable_payment();}
+		else{this.enable_payment();}
+	}
+
+}
+
+
+
+requirements = {};
+
+
+for (var i = rows.length - 1; i >= 0; i--) {
+	requirements[rows[i]] = new Requirement(i);
+}
+
+
+console.log(requirements);
+
+
+
+
+function hide_payment()
+{
+	let elements = document.getElementsByClassName('payment');
+	for (var i = elements.length - 1; i >= 0; i--) {
+		elements[i].style.display="none";
+	}
+
+	
+}
+
+
+
+//hide_payment();
+
+
+
+
+
+function view_payment()
+{
+	let elements = document.getElementsByClassName('payment');
+	for (var i = elements.length - 1; i >= 0; i--) {
+		elements[i].style.display="";
+	}
+}
+
+//view_payment();
+
+//console.log(form_1);
+//console.log(form_1.length);
+
+
+function handle_click(event)
+{console.log(event);}
+
+
+
+
+
+for (key in requirements) 
+{
+	req = requirements[key];
+	for (var i = req.input_fields.length - 1; i >= 0; i--) {
+		req.input_fields[i].addEventListener(
+			"click",(e)=>{handle_click(e);});
+		req.input_parents_fields[i].addEventListener(
+			"click",(e)=>{handle_click(e);});
+	}
+
+}
+
+
+
+
+
+
+console.log(requirements);
+
+
+
+
+
+
+
+
+</script>
 
 
 
