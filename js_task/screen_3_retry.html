@@ -146,13 +146,13 @@ td{background: white;text-align: center;}
 		name="biometric" form="form_1" value="not"></td>
 
 	<td class="payment biometric_payment">
-		<input class="payment biometric_payment" type="radio" name="biometric_payment" 
+		<input class="biometric_payment" type="radio" name="biometric_payment" 
 		form="form_1" value="would"></td>
 	<td class="payment biometric_payment">
-		<input class="payment biometric_payment" type="radio" name="biometric_payment" 
+		<input class="biometric_payment" type="radio" name="biometric_payment" 
 		form="form_1" value="might"></td>
 	<td class="payment biometric_payment">
-		<input class="payment biometric_payment" type="radio" name="biometric_payment" 
+		<input class="biometric_payment" type="radio" name="biometric_payment" 
 		form="form_1" value="free">
 	</td>
 </tr>
@@ -170,13 +170,13 @@ td{background: white;text-align: center;}
 		name="idreader" form="form_1" value="not"></td>
 
 	<td class="payment idreader_payment">
-		<input class="payment idreader_payment" type="radio" name="idreader_payment" 
+		<input class="idreader_payment" type="radio" name="idreader_payment" 
 		form="form_1" value="would"></td>
 	<td class="payment idreader_payment">
-		<input class="payment idreader_payment" type="radio" name="idreader_payment" 
+		<input class="idreader_payment" type="radio" name="idreader_payment" 
 		form="form_1" value="might"></td>
 	<td class="payment idreader_payment">
-		<input class="payment idreader_payment" type="radio" name="idreader_payment" 
+		<input class="idreader_payment" type="radio" name="idreader_payment" 
 		form="form_1" value="free">
 	</td>
 </tr>
@@ -230,7 +230,7 @@ class Requirement{
 		this.input_fields = get_inputs(this.name);
 		this.input_parents_fields=[];
 		for (var i = this.input_fields.length - 1; i >= 0; i--) 
-		{this.input_parents_fields[i] = this.input_fields[i].offsetParent;}
+		{this.input_parents_fields.push(this.input_fields[i].offsetParent);}
 		
 		this.payment_fields = get_inputs(this.name,true);
 		
@@ -308,7 +308,7 @@ class Requirement{
 	get_input()
 	{
 		for (var i = this.input_fields.length - 1; i >= 0; i--) {
-			if (this.input_fields[i].checked){return this.input_fields[i].value;}
+			if (this.input_fields[i].checked){return this.input_fields[i].checked;}
 		}
 		return false;
 	}
@@ -346,10 +346,10 @@ console.log(requirements);
 
 function hide_payment()
 {
+	return;
 	let elements = document.getElementsByClassName('payment');
-	for (var i = elements.length - 1; i >= 0; i--) {
-		elements[i].style.display="none";
-	}
+	for (var i = elements.length - 1; i >= 0; i--) 
+	{elements[i].style.display="none";}
 
 	
 }
@@ -364,6 +364,7 @@ function hide_payment()
 
 function view_payment()
 {
+	return;
 	let elements = document.getElementsByClassName('payment');
 	for (var i = elements.length - 1; i >= 0; i--) {
 		elements[i].style.display="";
@@ -403,7 +404,7 @@ function get_target_requirement(target)
 	if (!last_clas_name.includes("payment")){
 		return last_clas_name;
 	}
-	return last_clas_name.split("_")[0]
+	return last_clas_name.split("_")[0];
 }
 
 
@@ -412,6 +413,7 @@ function get_target_requirement(target)
 
 function handle_click(event)
 {
+	console.log("I got a click");
 	let target = event.target;
 	if (target.nodeName=="TD") {target=target.children[0];}
 	//No we have target, equal to the input field
@@ -425,6 +427,20 @@ function handle_click(event)
 	if (is_payment)
 	{requirements[requirement_name].set_payment(selection_value);}
 	else{requirements[requirement_name].set_input(selection_value);}
+
+	let all_payments_are_selected = true;
+	for (var i = requirements.length - 1; i >= 0; i--) {
+		if (!requirements[i].get_input())
+		{all_payments_are_selected=false;}
+	}
+	if (all_payments_are_selected)
+	{console.log("I should view payment");
+		view_payment();}
+	else{
+		console.log("I should hide payment");
+		hide_payment();
+	}
+	console.log(requirements);
 }
 
 
@@ -433,18 +449,22 @@ function handle_click(event)
 
 for (key in requirements) 
 {
+	//console.log("key",key);
 	req = requirements[key];
+
 	for (var i = req.input_fields.length - 1; i >= 0; i--) {
-		//req.input_fields[i].addEventListener(
-		//	"click",(e)=>{handle_click(e);});
+		//console.log("Here I add a listener",i);
 		req.input_parents_fields[i].addEventListener(
 			"click",(e)=>{handle_click(e);});
-		//req.payment_fields[i].addEventListener(
-		//	"click",(e)=>{handle_click(e);});
 		req.payment_parents_fields[i].addEventListener(
 			"click",(e)=>{handle_click(e);});
-	}
 
+		//console.log("req",req)
+		for (var j = req.input_fields.length - 1; j >= 0; j--) {
+			req.input_fields[j].checked=false;
+		}
+	}
+	req.disable_payment();
 }
 
 
@@ -455,10 +475,9 @@ for (key in requirements)
 //console.log(requirements);
 
 
+hide_payment();
 
 
-
-console.log("_payment".includes("payment"));
 
 
 </script>
