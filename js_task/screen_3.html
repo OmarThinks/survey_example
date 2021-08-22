@@ -3,6 +3,8 @@
 <head>
 	<title>Screen 3</title>
 </head>
+<body>
+
 <style type="text/css">
 *{
 	font-family: arial;
@@ -80,7 +82,7 @@ td{background: white;text-align: center;}
 
 .tooltip .tooltiptext {
   visibility: hidden;
-  width: 120px;
+  width: 150px;
   background-color: black;
   color: #fff;
   text-align: center;
@@ -97,437 +99,385 @@ td{background: white;text-align: center;}
   visibility: visible;
 }
 
-
-
-
-
-
-
-
-
+.center_text{text-align: center;}
 
 </style>
 
+<h1>Screen 3:</h1>
 
-</head>
-<body>
 
-<h1>New Branch Requirements Checklist:</h1>
-
+<form id="form_1">
+	
+</form>
 
 
 
 
 <table>
-	<tr>
-		<td class="no-border"></td>
-		<th colspan="3" style="text-align: center;">Preference</th>
-		<th class="payment-plan-cell" colspan="3" style="text-align: center;">Willingness to Pay</th>
-	</tr>
-	<tr>
-		<td class="no-border"></td>
-		<th style="text-align: center;">Must have</th>
-		<th style="text-align: center;">Like</th>
-		<th style="text-align: center;">Do Not Need</th>
-		<th class="payment-plan-cell" style="text-align: center;">Would Pay</th>
-		<th class="payment-plan-cell" style="text-align: center;">Might Pay</th>
-		<th class="payment-plan-cell" style="text-align: center;">Expect For Free</th>
-	</tr>
-	<tr>
-		<th>
+
+<tr>
+	<td class="no-border"></td>
+	<th class="center_text" colspan="3">Preferences</th>
+	<th class="payment center_text" colspan="3">Willingness to Pay</th>
+</tr>
+
+<tr>
+	<td class="no-border"></td>
+	<th class="center_text">Must Have</th>
+	<th class="center_text">Like</th>
+	<th class="center_text">Do not Need</th>
+	
+	<th class="payment center_text">Would Pay</th>
+	<th class="payment center_text">Might Pay</th>
+	<th class="payment center_text">Expect for Free</th>
+</tr>
+
+
+<tr>
+	<th class="">
 
 <div class="tooltip">Biometrics
-  <span class="tooltiptext">Tooltip of Biometrics</span>
-</div> 
-
-
-		</th>
-		<td><input type="radio" id="required_0"></td>
-		<td><input type="radio" id="like_0"></td>
-		<td><input type="radio" id="not_need_0"></td>
-		<td><input type="radio" id="would_0"></td>
-		<td><input type="radio" id="might_0"></td>
-		<td><input type="radio" id="free_0"></td>
-	</tr>
-	<tr>
-		<th>
-
-		
-<div class="tooltip">ID Card Reader
-  <span class="tooltiptext">Tooltip of ID Card Reader</span>
+  <span class="tooltiptext">Facial Recoginition</span>
 </div>
-	</th>
-		<td><input type="radio" id="required_1"></td>
-		<td><input type="radio" id="like_1"></td>
-		<td><input type="radio" id="not_need_1"></td>
-		<td><input type="radio" id="would_1"></td>
-		<td><input type="radio" id="might_1"></td>
-		<td><input type="radio" id="free_1"></td>
-	</tr>
-</table>
+</th>
+	<td class=" biometric">
+		<input class=" biometric" type="radio" 
+		name="biometric" form="form_1" value="must"></td>
+	<td class=" biometric">
+		<input class=" biometric" type="radio" 
+		name="biometric" form="form_1" value="like"></td>
+	<td class=" biometric">
+		<input class=" biometric" type="radio" 
+		name="biometric" form="form_1" value="not"></td>
+
+	<td class="payment biometric_payment">
+		<input class="biometric_payment" type="radio" name="biometric_payment" 
+		form="form_1" value="would"></td>
+	<td class="payment biometric_payment">
+		<input class="biometric_payment" type="radio" name="biometric_payment" 
+		form="form_1" value="might"></td>
+	<td class="payment biometric_payment">
+		<input class="biometric_payment" type="radio" name="biometric_payment" 
+		form="form_1" value="free">
+	</td>
+</tr>
+
+<tr>
+	<th>ID Card Reader</th>
+	<td class=" idreader">
+		<input class=" idreader" type="radio" 
+		name="idreader" form="form_1" value="must"></td>
+	<td class=" idreader">
+		<input class=" idreader" type="radio" 
+		name="idreader" form="form_1" value="like"></td>
+	<td class=" idreader">
+		<input class=" idreader" type="radio" 
+		name="idreader" form="form_1" value="not"></td>
+
+	<td class="payment idreader_payment">
+		<input class="idreader_payment" type="radio" name="idreader_payment" 
+		form="form_1" value="would"></td>
+	<td class="payment idreader_payment">
+		<input class="idreader_payment" type="radio" name="idreader_payment" 
+		form="form_1" value="might"></td>
+	<td class="payment idreader_payment">
+		<input class="idreader_payment" type="radio" name="idreader_payment" 
+		form="form_1" value="free">
+	</td>
+</tr>
 
 
 
-<div style="display: flex;justify-content: center;">
-<a href="screen_1.html">
-	
-	<button class="nav_button">&lt;&lt; Back</button>
-</a>
-<a href="">
-	<button class="nav_button">Continue &gt;&gt;</button>
-</a>
-</div>
 
 <script type="text/javascript">
 
 
 
-class PaymentPlan{
-	constructor(requirement_number)
-	{
-		this.requirement_number = requirement_number;
-		
-		this.would_input_element = 
-		document.getElementById('would_'+requirement_number.toString());
-		//console.log(this.would_input_element);
 
-		this.would_input_cell = this.would_input_element.offsetParent;
-		//console.log(this.would_input_cell);
-		this.would_input_cell.id = 
-		"would_cell_"+requirement_number.toString();
+function get_inputs(value, payment=false)
+{
+	let all_inputs = document.getElementsByTagName('input');
+	let normal_inputs = [];
+	let payment_inputs = [];
 
-		this.might_input_element = 
-		document.getElementById('might_'+requirement_number.toString());
-		this.might_input_cell = this.might_input_element.offsetParent;
-		this.might_input_cell.id = 
-		"might_cell_"+requirement_number.toString();
-
-		this.free_input_element = 
-		document.getElementById('free_'+requirement_number.toString());
-		this.free_input_cell = this.free_input_element.offsetParent;
-		this.free_input_cell.id = 
-		"free_cell_"+requirement_number.toString();
-
-		this.selected=false;
-		this.displayed=false;
-		this.enabled=false;
+	for (var i = all_inputs.length - 1; i >= 0; i--) {
+		if((all_inputs[i].value=="must")||(all_inputs[i].value=="like")||
+			(all_inputs[i].value=="not"))
+		{
+			if (all_inputs[i].name==value) 
+			{normal_inputs.push(all_inputs[i]);}
+		}
+		else if(all_inputs[i].name==(value+"_payment")){
+			payment_inputs.push(all_inputs[i]);
+		}
 	}
-
-
-
-
-	unselect_would()
-	{this.would_input_element.checked=false;}
-	unselect_might()
-	{this.might_input_element.checked=false;}
-	unselect_free()
-	{this.free_input_element.checked=false;}
-
-	reset_selection()
-	{this.unselect_would();this.unselect_might();this.unselect_free();}
-
-	select_would()
-	{
-		this.reset_selection();
-		this.would_input_element.checked=true;
-		this.selected="would";
-	}
-	select_might()
-	{
-		this.reset_selection();
-		this.might_input_element.checked=true;
-		this.selected="might";
-	}
-	select_free()
-	{
-		this.reset_selection();
-		this.free_input_element.checked=true;
-		this.selected="free";
-	}
-
-	display()
-	{
-		console.log("display");
-		this.would_input_element.style.display="";
-		this.would_input_cell.style.display="table-cell";
-		this.might_input_element.style.display="";
-		this.might_input_cell.style.display="table-cell";
-		this.free_input_element.style.display="";
-		this.free_input_cell.style.display="table-cell";
-		//this.reset_selection();
-		this.displayed=true;	
-	}
-	hide()
-	{
-		console.log("hide");
-		this.would_input_element.style.display="none";
-		this.would_input_cell.style.display="none";
-		this.might_input_element.style.display="none";
-		this.might_input_cell.style.display="none";
-		this.free_input_element.style.display="none";
-		this.free_input_cell.style.display="none";
-		this.reset_selection();
-		this.displayed=false;
-	}
-	enable()
-	{
-		console.log("enble");
-		this.would_input_element.style.display="";
-		this.would_input_cell.style.background="white";
-		this.might_input_element.style.display="";
-		this.might_input_cell.style.background="white";
-		this.free_input_element.style.display="";
-		this.free_input_cell.style.background="white";
-		this.enabled=true;
-	}
-	disable()
-	{
-		console.log("disable");
-		this.would_input_element.style.display="none";
-		this.would_input_cell.style.background="grey";
-		this.might_input_element.style.display="none";
-		this.might_input_cell.style.background="grey";
-		this.free_input_element.style.display="none";
-		this.free_input_cell.style.background="grey";
-		this.reset_selection();
-		this.enabled=false;		
-	}
+	if (payment) {return payment_inputs;}
+	return normal_inputs;
 }
 
 
+
+
+
+
+
+
+const rows = ["biometric","idreader"]
 
 
 
 
 class Requirement{
-	constructor(requirement_number)
+	constructor(number)
 	{
-		this.requirement_number = requirement_number;
+		this.number = number;
+		this.name = rows[number];
+		this.input_fields = get_inputs(this.name);
+		this.input_parents_fields=[];
+		for (var i = this.input_fields.length - 1; i >= 0; i--) 
+		{this.input_parents_fields.push(this.input_fields[i].offsetParent);}
 		
-		this.required_input_element = 
-		document.getElementById('required_'+requirement_number.toString());
-		this.required_input_cell = this.required_input_element.offsetParent;
-		this.required_input_cell.id = 
-		"required_cell_"+requirement_number.toString();
-
-		this.like_input_element = 
-		document.getElementById('like_'+requirement_number.toString());
-		this.like_input_cell = this.like_input_element.offsetParent;
-		this.like_input_cell.id = 
-		"like_cell_"+requirement_number.toString();
-
-		this.not_need_input_element = 
-		document.getElementById('not_need_'+requirement_number.toString());
-		this.not_need_input_cell = this.not_need_input_element.offsetParent;
-		this.not_need_input_cell.id = 
-		"not_need_cell_"+requirement_number.toString();
-
-		this.selected=false;
-		this.payment_plan = new PaymentPlan(requirement_number);
-	}
-
-	unselect_required()
-	{this.required_input_element.checked=false;}
-	unselect_like()
-	{this.like_input_element.checked=false;}
-	unselect_not_need()
-	{
-		this.not_need_input_element.checked=false;
-		this.payment_plan.enable();
-
-	}
-
-	reset_selection()
-	{this.unselect_like();this.unselect_required();this.unselect_not_need();}
-
-	select_required()
-	{
-		this.reset_selection();
-		this.required_input_element.checked=true;
-		this.selected="required";
-	}
-	select_like()
-	{
-		this.reset_selection();
-		this.like_input_element.checked=true;
-		this.selected="like";
-	}
-	select_not_need()
-	{
-		this.reset_selection();
-		this.not_need_input_element.checked=true;
-		this.selected="not_need";
-		this.payment_plan.disable();
-	}
-
-}
-
-
-
-
-
-
-is_visible_payment_plan = true;
-
-
-
-
-
-
-var requirements = [];
-requirements[0] = new Requirement(0);
-requirements[1] = new Requirement(1);
-
-
-
-
-
-
-function get_target_number(event)
-{
-	let splitted = event.target.id.split("_");
-	return parseInt(splitted[splitted.length-1]);
-}
-
-function get_target_name(event)
-{
-	let splitted = event.target.id.split("_");
-	return splitted[0];
-}
-
-
-
-
-
-function hide_payment_plan()
-{
-	let cells=document.getElementsByClassName("payment-plan-cell");
-	for (var i = cells.length - 1; i >= 0; i--) {
-		cells[i].style.display="none";
-	}
-	for (var i = requirements.length - 1; i >= 0; i--) 
-	{requirements[i].payment_plan.hide();}
-
-	is_visible_payment_plan=false;
-}
-
-
-
-
-function view_payment_plan()
-{
-	let cells=document.getElementsByClassName("payment-plan-cell");
-	for (var i = cells.length - 1; i >= 0; i--) {
-		cells[i].style.display="table-cell";
-	}
-	for (var i = requirements.length - 1; i >= 0; i--) 
-	{requirements[i].payment_plan.display();}
-	is_visible_payment_plan=true;
-}
-
-
-
-
-
-
-
-
-function handle_selection(event)
-{
-	//console.log(is_visible_payment_plan);
-	let target_number = get_target_number(event);
-	let target_name = get_target_name(event);
-
-	if (target_name=="required")
-	{
-		requirements[target_number].select_required();
-		if (is_visible_payment_plan)
-		{requirements[target_number].payment_plan.enable();}
+		this.payment_fields = get_inputs(this.name,true);
 		
+		this.payment_parents_fields=[];
+		for (var i = this.payment_fields.length - 1; i >= 0; i--) 
+		{this.payment_parents_fields[i] = this.payment_fields[i].offsetParent;}
+
+		this.payment_disabled=false;
 	}
-	else if (target_name=="like")
+
+	//Get the payment value, example: "would", or false if nothing is chosen
+	get_payment()
 	{
-		requirements[target_number].select_like();
-		if (is_visible_payment_plan)
-		{requirements[target_number].payment_plan.enable();}
+		if (this.payment_disabled) {return false;}
+		for (var i = this.payment_fields.length - 1; i >= 0; i--) {
+			if (this.payment_fields[i].checked){return this.payment_fields[i].value;}
+		}
+		return false;		
 	}
-	else if (target_name=="not")
+	//set the payment if payment enabled, Example Input: "would"
+	set_payment(value)
 	{
-		requirements[target_number].select_not_need();
-		if (is_visible_payment_plan)
-		{
-			//console.log("I should disable");
-			requirements[target_number].payment_plan.disable();
+		if (this.payment_disabled) {return;}
+		for (var i = this.payment_fields.length - 1; i >= 0; i--) {
+			if(this.payment_fields[i].value==value)
+				{
+					this.payment_fields[i].checked=true;
+					this.payment_fields[i].style.background ="cyan";
+				}
+			else{this.payment_fields[i].style.background ="white";}
 		}		
 	}
-	
-	else if (target_name=="would")
-	{requirements[target_number].payment_plan.select_would();return;}
-	else if (target_name=="might")
-	{requirements[target_number].payment_plan.select_might();return;}
-	else if (target_name=="free")
-	{requirements[target_number].payment_plan.select_free();return;}
-	
-	
-	if (!is_visible_payment_plan) 
+	//Uncheck all payment fields for this requirement
+	// Repaints all backgounds with whit if enabled
+	reset_payment()
 	{
-		let is_all_selected = true;
-		for (var i = requirements.length - 1; i >= 0; i--) 
-		{if (!requirements[i].selected){is_all_selected=false;}}
-		if (is_all_selected)
-		{view_payment_plan()}
+		for (var i = this.payment_fields.length - 1; i >= 0; i--) {
+			this.payment_fields[i].checked = false;
+			if (!this.payment_disabled)
+			{this.payment_parents_fields[i].style.background= "white";}
+		}
+	}
+
+	//reset payment fields and hide the fields, and background is grey
+	disable_payment()
+	{
+		this.reset_payment();
+		for (var i = this.payment_fields.length - 1; i >= 0; i--) {
+			this.payment_fields[i].style.display="none";
+			this.payment_parents_fields[i].background="grey";
+		}
+		this.payment_disabled=true;
+	}
+	/* Concentrate
+	This enables payment
+	Payment may be already enabled, to it should not be 
+
+	*/
+	enable_payment()
+	{
+		if (this.get_payment())
+		{return;/*It is already enabled*/}
+
+		//Now it is disabled
+		for (var i = this.payment_fields.length - 1; i >= 0; i--) 
+		{
+			this.payment_fields[i].style.display="";
+			this.payment_parents_fields[i].background="white";
+		}
+		this.reset_payment();
+		this.payment_disabled=false;
+	}
+
+	// gets the input, or false if nothing is chosen, exampel: "must"
+	get_input()
+	{
+		for (var i = this.input_fields.length - 1; i >= 0; i--) {
+			if (this.input_fields[i].checked){return this.input_fields[i].checked;}
+		}
+		return false;
+	}
+	//sets the input, example: "must"
+	set_input(value)
+	{
+		for (var i = this.input_fields.length - 1; i >= 0; i--) {
+			if(this.input_fields[i].value==value)
+				{
+					this.input_fields[i].checked=true;
+					this.input_fields[i].style.background ="cyan";
+				}
+			else{this.input_fields[i].style.background ="white";}
+		}
+		if (value=="not") {this.disable_payment();}
+		else{this.enable_payment();}
 	}
 
 }
+
+
+
+requirements = {};
+
+
+for (var i = rows.length - 1; i >= 0; i--) {
+	requirements[rows[i]] = new Requirement(i);
+}
+
 
 //console.log(requirements);
 
 
 
 
-
-
-
-
-
-
-for (var i = requirements.length - 1; i >= 0; i--) {
-	requirements[i].reset_selection();
-	requirements[i].required_input_element.addEventListener(
-		"click",handle_selection);
-	requirements[i].required_input_cell.addEventListener(
-		"click",handle_selection);
-	
-	requirements[i].like_input_element.addEventListener(
-		"click",handle_selection);
-	requirements[i].like_input_cell.addEventListener(
-		"click",handle_selection);
-	
-	requirements[i].not_need_input_element.addEventListener(
-		"click",handle_selection);
-	requirements[i].not_need_input_cell.addEventListener(
-		"click",handle_selection);
-
-	requirements[i].payment_plan.reset_selection();
-	
-
-	requirements[i].payment_plan.would_input_element.addEventListener(
-		"click",handle_selection);
-	requirements[i].payment_plan.would_input_cell.addEventListener(
-		"click",handle_selection);
-	
-	requirements[i].payment_plan.might_input_element.addEventListener(
-		"click",handle_selection);
-	requirements[i].payment_plan.might_input_cell.addEventListener(
-		"click",handle_selection);
-	
-	requirements[i].payment_plan.free_input_element.addEventListener(
-		"click",handle_selection);
-	requirements[i].payment_plan.free_input_cell.addEventListener(
-		"click",handle_selection);
+function hide_payment()
+{
+	//return;
+	let elements = document.getElementsByClassName('payment');
+	for (var i = elements.length - 1; i >= 0; i--) 
+	{elements[i].style.display="none";}
 }
 
-hide_payment_plan();
+
+
+//hide_payment();
+
+
+
+
+
+function view_payment()
+{
+	//return;
+	let elements = document.getElementsByClassName('payment');
+	for (var i = elements.length - 1; i >= 0; i--) {
+		elements[i].style.display="";
+	}
+}
+
+//view_payment();
+
+//console.log(form_1);
+//console.log(form_1.length);
+
+
+
+
+function get_is_payment(target)
+{
+	//console.log("calssList",event.target.classList[0]);
+	if (target.classList[0].includes("payment")){return true}
+	return false;
+}
+
+
+
+
+
+function get_target_requirement(target)
+{
+	let classList = target.classList;
+	//console.log(classList);
+	let last_clas_name = classList[classList.length -1];
+	if (!last_clas_name.includes("payment")){
+		return last_clas_name;
+	}
+	return last_clas_name.split("_")[0];
+}
+
+
+
+
+
+function handle_click(event)
+{
+	//console.log("I got a click");
+	let target = event.target;
+	if (target.nodeName=="TD") {target=target.children[0];}
+	//No we have target, equal to the input field
+	let is_payment = get_is_payment(target);
+	//console.log(is_payment);
+	//console.log(target);
+	
+	let requirement_name = get_target_requirement(target)
+	let selection_value = target.value
+
+	if (is_payment)
+	{requirements[requirement_name].set_payment(selection_value);}
+	else{requirements[requirement_name].set_input(selection_value);}
+
+	let all_payments_are_selected = true;
+	//console.log("I will check if all is checked");
+	//console.log(0,requirements[0].get_input());
+	//for (var i = requirements.length - 1; i >= 0; i--) {
+	for (key in requirements) 
+	{
+		//console.log(key,requirements[key].get_input());
+		if (!requirements[key].get_input())
+		{all_payments_are_selected=false;}
+	}
+	if (all_payments_are_selected)
+	{
+		//console.log("I should view payment");
+		view_payment();
+	}
+	else{
+		//console.log("I should hide payment");
+		hide_payment();
+	}
+	//console.log(requirements);
+}
+
+
+
+
+
+for (key in requirements) 
+{
+	//console.log("key",key);
+	req = requirements[key];
+
+	for (var i = req.input_fields.length - 1; i >= 0; i--) {
+		//console.log("Here I add a listener",i);
+		req.input_parents_fields[i].addEventListener(
+			"click",(e)=>{handle_click(e);});
+		req.payment_parents_fields[i].addEventListener(
+			"click",(e)=>{handle_click(e);});
+
+		req.input_fields[i].checked=false;
+	}
+	req.disable_payment();
+}
+
+
+
+
+
+
+//console.log(requirements);
+
+
+hide_payment();
+
 
 
 
@@ -538,14 +488,7 @@ hide_payment_plan();
 
 
 
-
-
-
-
-
-
-
-
+</table>
 
 
 
