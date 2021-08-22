@@ -339,19 +339,17 @@ for (var i = rows.length - 1; i >= 0; i--) {
 }
 
 
-console.log(requirements);
+//console.log(requirements);
 
 
 
 
 function hide_payment()
 {
-	return;
+	//return;
 	let elements = document.getElementsByClassName('payment');
 	for (var i = elements.length - 1; i >= 0; i--) 
 	{elements[i].style.display="none";}
-
-	
 }
 
 
@@ -364,7 +362,7 @@ function hide_payment()
 
 function view_payment()
 {
-	return;
+	//return;
 	let elements = document.getElementsByClassName('payment');
 	for (var i = elements.length - 1; i >= 0; i--) {
 		elements[i].style.display="";
@@ -390,12 +388,6 @@ function get_is_payment(target)
 
 
 
-function get_requiremnt_from_input()
-{}
-
-
-
-
 function get_target_requirement(target)
 {
 	let classList = target.classList;
@@ -413,7 +405,7 @@ function get_target_requirement(target)
 
 function handle_click(event)
 {
-	console.log("I got a click");
+	//console.log("I got a click");
 	let target = event.target;
 	if (target.nodeName=="TD") {target=target.children[0];}
 	//No we have target, equal to the input field
@@ -429,18 +421,25 @@ function handle_click(event)
 	else{requirements[requirement_name].set_input(selection_value);}
 
 	let all_payments_are_selected = true;
-	for (var i = requirements.length - 1; i >= 0; i--) {
-		if (!requirements[i].get_input())
+	//console.log("I will check if all is checked");
+	//console.log(0,requirements[0].get_input());
+	//for (var i = requirements.length - 1; i >= 0; i--) {
+	for (key in requirements) 
+	{
+		//console.log(key,requirements[key].get_input());
+		if (!requirements[key].get_input())
 		{all_payments_are_selected=false;}
 	}
 	if (all_payments_are_selected)
-	{console.log("I should view payment");
-		view_payment();}
+	{
+		//console.log("I should view payment");
+		view_payment();
+	}
 	else{
-		console.log("I should hide payment");
+		//console.log("I should hide payment");
 		hide_payment();
 	}
-	console.log(requirements);
+	//console.log(requirements);
 }
 
 
@@ -459,10 +458,7 @@ for (key in requirements)
 		req.payment_parents_fields[i].addEventListener(
 			"click",(e)=>{handle_click(e);});
 
-		//console.log("req",req)
-		for (var j = req.input_fields.length - 1; j >= 0; j--) {
-			req.input_fields[j].checked=false;
-		}
+		req.input_fields[i].checked=false;
 	}
 	req.disable_payment();
 }
